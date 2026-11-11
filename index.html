@@ -1,238 +1,1105 @@
 <!doctype html>
 <html lang="mn">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>TB Plan — Дижитал · Дизайн · Медиа</title>
-<link rel="stylesheet" href="index.css"/>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TB Plan — Вэб · Сошиал · Контент</title>
+<meta name="description" content="TB Plan — вэб сайт, сошиал хуудас хөтлөлт, reel, постер, chatbot. Бизнесээ онлайнд өсгөх гурван багц.">
+<script>
+/* Self-hosted Fontsource woff2 — latin + cyrillic + cyrillic-ext (Ө, Ү) + latin-ext (₮) */
+(function(){
+  var FS='https://cdn.jsdelivr.net/fontsource/fonts/';
+  var R={
+    'latin':'U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD',
+    'latin-ext':'U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF',
+    'cyrillic':'U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116',
+    'cyrillic-ext':'U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F'
+  };
+  var F=[
+    ['Inter Tight','inter-tight',[300,400,500,600],['latin','latin-ext','cyrillic','cyrillic-ext']],
+    ['Unbounded','unbounded',[700],['latin','cyrillic','cyrillic-ext']],
+    ['Kaushan Script','kaushan-script',[400],['latin']],
+    ['Syncopate','syncopate',[700],['latin']],
+    ['Michroma','michroma',[400],['latin']],
+    ['Archivo Black','archivo-black',[400],['latin']]
+  ];
+  var css='';
+  F.forEach(function(f){f[2].forEach(function(w){f[3].forEach(function(s){
+    css+="@font-face{font-family:'"+f[0]+"';font-style:normal;font-weight:"+w+";font-display:swap;src:url("+FS+f[1]+"@latest/"+s+"-"+w+"-normal.woff2) format('woff2');unicode-range:"+R[s]+"}\n";
+  });});});
+  var st=document.createElement('style');st.textContent=css;document.head.appendChild(st);
+  window.heroReady=new Promise(function(r){window.__resolveHero=r;});
+})();
+</script>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/",
+    "rapier": "https://cdn.jsdelivr.net/npm/@dimforge/rapier3d-compat@0.14.0/rapier.es.js"
+  }
+}
+</script>
+<style>
+:root{
+  --ink:#111418; --bg:#f4f7fb; --pill:rgba(234,239,246,.82); --panel:#12151b; --accent:#ff5512;
+  --u:calc(100vw / 1536);
+  --sheet:url("https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20261109_062058_badb8004-99df-4227-91bb-ecd9ca4d0adb.png&w=2048&q=85");
+}
+*{box-sizing:border-box;margin:0;padding:0}
+a{color:inherit;text-decoration:none}
+button{background:none;border:0;font:inherit;color:inherit;cursor:pointer}
+html{scroll-behavior:smooth}
+body{font-family:'Inter Tight',system-ui,sans-serif;-webkit-font-smoothing:antialiased;background:var(--bg);color:var(--ink);overflow-x:hidden}
+
+/* ---------- Loader ---------- */
+#loader{position:fixed;inset:0;z-index:50;background:var(--bg);display:flex;align-items:center;justify-content:center;clip-path:inset(0 0 0 0)}
+#loader p{overflow:hidden;font-weight:500;font-size:calc(34*var(--u));letter-spacing:-.01em;line-height:1.2;padding:0 20px}
+#loader p span{display:inline-block;transform:translateY(110%)}
+
+/* ---------- Header ---------- */
+.hdr{position:fixed;top:calc(24*var(--u));left:calc(90*var(--u));right:calc(90*var(--u));display:flex;justify-content:space-between;align-items:flex-start;pointer-events:none;z-index:20}
+.pill{pointer-events:auto;display:flex;align-items:center;height:calc(64*var(--u));border-radius:calc(16*var(--u));background:var(--pill);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.pill-l{width:calc(708*var(--u));padding:0 calc(22*var(--u));overflow:hidden;transition:width .6s cubic-bezier(.7,0,.2,1)}
+.logo{flex:none;display:inline-flex;align-items:baseline;font-family:'Kaushan Script',cursive;font-size:calc(31*var(--u));line-height:1;letter-spacing:-.01em;transform:skewX(-6deg);white-space:nowrap}
+.logo i{display:block;width:calc(4*var(--u));height:calc(4*var(--u));border-radius:50%;background:currentColor;margin-left:calc(3*var(--u))}
+.nav{flex:1 1 auto;min-width:0;overflow:hidden;margin-left:calc(52*var(--u));display:flex;gap:calc(25*var(--u));font-size:calc(18*var(--u));color:#1e2128;white-space:nowrap;transition:opacity .35s}
+.nav a{transition:opacity .2s}.nav a:hover{opacity:.55}
+.more{flex:none;margin-left:auto;width:calc(30*var(--u));height:calc(30*var(--u));display:grid;place-items:center;border-radius:8px}
+.more svg{width:calc(4*var(--u));height:calc(16*var(--u))}
+.hdr.compact .pill-l{width:calc(250*var(--u))}
+.hdr.compact .nav{opacity:0;pointer-events:none}
+.pill-r{height:calc(60*var(--u));margin-top:calc(2*var(--u));padding:0 calc(13*var(--u)) 0 calc(22*var(--u));gap:calc(18*var(--u));font-size:calc(18*var(--u));white-space:nowrap}
+.pill-r a:not(.chip){transition:opacity .2s}.pill-r a:not(.chip):hover{opacity:.55}
+.chip{background:#16191f;color:#fafafa;border-radius:calc(9*var(--u));padding:calc(8*var(--u)) calc(16*var(--u));transition:background .2s}
+.chip:hover{background:#2b3140}
+.menu{position:fixed;z-index:21;top:calc(96*var(--u));left:calc(90*var(--u));min-width:240px;padding:10px;border-radius:16px;background:rgba(244,247,251,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 20px 50px rgba(40,60,110,.16);display:flex;flex-direction:column;opacity:0;transform:translateY(-8px);pointer-events:none;transition:opacity .25s,transform .25s}
+.menu.open{opacity:1;transform:none;pointer-events:auto}
+.menu a{padding:12px 14px;border-radius:10px;font-size:16px;font-weight:500}
+.menu a:hover{background:rgba(17,20,24,.06)}
+
+/* ---------- Hero ---------- */
+.hero{--u:min(calc(100vw / 1536),calc(100vh / 864));position:relative;height:100vh;min-height:560px;overflow:hidden;background:linear-gradient(180deg,#dbe3ee 0%,#eef2f8 62%,#f4f7fb 100%)}
+#hero-canvas{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none}
+.hero-c{position:absolute;inset:0;z-index:2;display:flex;align-items:flex-end;justify-content:space-between;gap:calc(40*var(--u));padding:0 calc(90*var(--u)) calc(64*var(--u));pointer-events:none}
+.h1{font-weight:500;font-size:calc(128*var(--u));line-height:.94;letter-spacing:-.03em;white-space:nowrap;color:var(--ink);text-align:left}
+.mask{display:block;overflow:hidden;padding-bottom:.08em;margin-bottom:-.08em}
+.mask>span{display:inline-block}
+.hero-r{display:flex;flex-direction:column;align-items:flex-start;padding-bottom:calc(10*var(--u))}
+.sub{font-size:calc(23.5*var(--u));letter-spacing:.01em;line-height:1.15}
+.btn{pointer-events:auto;margin-top:calc(28*var(--u));height:calc(48*var(--u));padding:0 calc(29*var(--u));border-radius:calc(13*var(--u));background:#16191f;color:#fff;font-size:calc(16*var(--u));letter-spacing:.02em;display:inline-flex;align-items:center;transition:transform .3s cubic-bezier(.3,1.6,.5,1),background .3s}
+.btn:hover{transform:scale(1.05);background:#2b3140}
+
+/* ---------- Ticker ---------- */
+.ticker{padding:calc(72*var(--u)) 0 calc(40*var(--u))}
+.cap{text-align:center;font-size:calc(20.66*var(--u));letter-spacing:.033em;color:rgba(15,20,30,.38)}
+.marq{margin-top:calc(52*var(--u));overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent)}
+.track{display:flex;width:max-content;will-change:transform}
+.list{display:flex;align-items:center;gap:calc(96*var(--u));padding-right:calc(96*var(--u));list-style:none}
+.list li{height:calc(48*var(--u));display:flex;align-items:center;color:#0c0e12;font-size:calc(30*var(--u));line-height:1;white-space:nowrap}
+.w1{font-family:'Unbounded';font-weight:700;letter-spacing:.02em}
+.w2{font-family:'Archivo Black';text-transform:uppercase;letter-spacing:-.01em}
+.w3{font-family:'Syncopate';font-weight:700;font-size:calc(26*var(--u))!important;letter-spacing:.04em}
+.w4{font-family:'Michroma';font-size:calc(25*var(--u))!important;letter-spacing:.06em}
+.w5{font-weight:300;font-size:calc(28*var(--u))!important;letter-spacing:.42em}
+.w6{font-weight:600;letter-spacing:-.03em}
+
+/* ---------- Timeline → statement ---------- */
+.tls{position:relative;overflow:hidden}
+.tl-wrap{position:relative;z-index:1;padding:calc(150*var(--u)) calc(68*var(--u)) calc(60*var(--u));display:flex;justify-content:center}
+.tl{position:relative;width:100%;max-width:calc(1400*var(--u));aspect-ratio:1372/500}
+.tl>*{position:absolute}
+.tl-panel{inset:0;border-radius:calc(44*var(--u));background:var(--panel);box-shadow:0 calc(40*var(--u)) calc(70*var(--u)) rgba(40,60,110,.22),0 calc(6*var(--u)) calc(14*var(--u)) rgba(20,30,60,.18)}
+.tl-pause{left:1.7%;top:4.4%;width:calc(40*var(--u));height:calc(40*var(--u));border-radius:calc(11*var(--u));background:#2a2f39;display:grid;place-items:center;transition:background .2s;z-index:3}
+.tl-pause:hover{background:#363c48}
+.tl-pause svg{width:calc(11*var(--u));height:calc(12*var(--u));fill:#fff}
+.tl-ruler{left:8%;right:2.4%;top:5.2%;height:calc(28*var(--u));display:flex;justify-content:space-between;align-items:center}
+.tl-ruler b{font-size:calc(13*var(--u));font-weight:600;color:#e9edf3;width:0;display:flex;justify-content:center;white-space:nowrap}
+.tl-ruler i{width:1px;height:calc(10*var(--u));background:rgba(255,255,255,.22)}
+.lane{left:8%;right:2.4%;height:33%;border-radius:calc(14*var(--u));background:rgba(255,255,255,.05)}
+.lane.v1{top:16%}.lane.v2{top:56%}
+.vlab{left:2.9%;transform:translateY(-50%);font:600 calc(13*var(--u)) ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:#8d97a8;letter-spacing:.04em}
+.tl-slot{height:28%;aspect-ratio:1/1}
+.tl-slot.t1{top:18.5%}.tl-slot.t2{top:58.5%}
+.tl-block{position:absolute;inset:0;z-index:1;will-change:transform}
+.tile{position:absolute;inset:0;clip-path:url(#squircle);background-image:var(--sheet);background-size:358.04% 237.76%;background-repeat:no-repeat}
+.tile canvas{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity .4s}
+.tile.live canvas{opacity:1}
+.tile::after{content:"";position:absolute;inset:0;border-radius:22.4%;box-shadow:inset 0 0 var(--glow,12px) rgba(255,255,255,.55);pointer-events:none}
+.tp1{background-position:5.217% 8.312%}
+.tp3{background-position:94.851% 8.312%}
+.tp4{background-position:5.217% 90.04%}
+.tp5{background-position:49.966% 90.04%}
+.tp6{background-position:94.851% 90.04%}
+.playhead{top:12.5%;bottom:4.5%;width:calc(2*var(--u));background:var(--accent);z-index:2;transform:translateX(-50%);pointer-events:none}
+.playhead span{position:absolute;bottom:100%;left:50%;transform:translate(-50%,-2px);background:var(--accent);color:#fff;font-size:calc(11.5*var(--u));font-weight:600;font-variant-numeric:tabular-nums;padding:calc(5*var(--u)) calc(7*var(--u));border-radius:calc(6*var(--u));white-space:nowrap}
+.stmt{padding:calc(120*var(--u)) calc(90*var(--u)) calc(170*var(--u))}
+.stmt h2{font-weight:500;font-size:calc(57.2*var(--u));line-height:1.08;letter-spacing:-.012em;text-align:center;margin:0 auto;max-width:34ch}
+.st-slot{display:inline-block;width:1em;height:1em;margin:.1em .2em -.15em .2em;vertical-align:baseline}
+.st-spacer{height:calc(60*var(--u))}
+
+/* ---------- Packages ---------- */
+.sec{padding:calc(120*var(--u)) calc(90*var(--u))}
+.eyebrow{display:inline-flex;align-items:center;gap:calc(10*var(--u));font-size:calc(14*var(--u));letter-spacing:.14em;text-transform:uppercase;color:rgba(15,20,30,.5);font-weight:500}
+.eyebrow::before{content:"";width:calc(8*var(--u));height:calc(8*var(--u));border-radius:50%;background:var(--accent)}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:calc(40*var(--u));margin-bottom:calc(64*var(--u))}
+.sec h2{margin-top:calc(18*var(--u));font-weight:500;font-size:calc(88*var(--u));line-height:.98;letter-spacing:-.03em}
+.sec-intro{max-width:calc(470*var(--u));font-size:calc(20*var(--u));line-height:1.4;color:#4a515c}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:calc(20*var(--u));align-items:stretch}
+.card{position:relative;display:flex;flex-direction:column;background:#fff;border-radius:calc(32*var(--u));padding:calc(36*var(--u));box-shadow:0 calc(20*var(--u)) calc(50*var(--u)) rgba(40,60,110,.08),0 1px 0 rgba(20,30,60,.04);transition:transform .5s cubic-bezier(.3,1.4,.5,1),box-shadow .5s}
+.card:hover{transform:translateY(calc(-6*var(--u)));box-shadow:0 calc(30*var(--u)) calc(70*var(--u)) rgba(40,60,110,.14)}
+.card.dark{background:var(--panel);color:#f4f7fb}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start}
+.card-num{font-size:calc(14*var(--u));font-weight:600;letter-spacing:.08em;color:rgba(15,20,30,.4)}
+.dark .card-num{color:rgba(244,247,251,.45)}
+.ctile{position:relative;width:calc(76*var(--u));height:calc(76*var(--u));--glow:calc(76*var(--u)*.15)}
+.ctile .tile{transition:transform .6s cubic-bezier(.3,1.6,.5,1)}
+.card:hover .ctile .tile{transform:rotate(-8deg) scale(1.06)}
+.tag{display:inline-flex;align-self:flex-start;margin-top:calc(26*var(--u));font-size:calc(13*var(--u));font-weight:600;letter-spacing:.04em;padding:calc(6*var(--u)) calc(12*var(--u));border-radius:999px;background:rgba(17,20,24,.06)}
+.dark .tag{background:var(--accent);color:#fff}
+.card h3{margin-top:calc(18*var(--u));font-weight:500;font-size:calc(44*var(--u));line-height:1;letter-spacing:-.025em}
+.lead{margin-top:calc(14*var(--u));font-size:calc(17*var(--u));line-height:1.45;color:#5a616c}
+.dark .lead{color:rgba(244,247,251,.62)}
+.chips{display:flex;flex-wrap:wrap;gap:calc(8*var(--u));margin-top:calc(20*var(--u))}
+.chips span{font-size:calc(13.5*var(--u));padding:calc(6*var(--u)) calc(11*var(--u));border-radius:999px;border:1px solid rgba(17,20,24,.14)}
+.dark .chips span{border-color:rgba(244,247,251,.2)}
+.feat{list-style:none;margin-top:calc(26*var(--u));padding-top:calc(22*var(--u));border-top:1px solid rgba(17,20,24,.08);display:flex;flex-direction:column;gap:calc(12*var(--u));flex:1}
+.dark .feat{border-color:rgba(244,247,251,.1)}
+.feat li{position:relative;padding-left:calc(28*var(--u));font-size:calc(16*var(--u));line-height:1.35}
+.feat li::before{content:"";position:absolute;left:0;top:calc(1*var(--u));width:calc(18*var(--u));height:calc(18*var(--u));border-radius:50%;background:rgba(17,20,24,.07) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 6.2 5 8.5l4.5-5' fill='none' stroke='%23111418' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/62% no-repeat}
+.dark .feat li::before{background:var(--accent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 6.2 5 8.5l4.5-5' fill='none' stroke='%23fff' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/62% no-repeat}
+.price{margin-top:calc(30*var(--u));display:flex;align-items:baseline;gap:calc(10*var(--u));flex-wrap:wrap}
+.price b{font-weight:600;font-size:calc(34*var(--u));letter-spacing:-.02em}
+.price small{font-size:calc(14*var(--u));color:#6b727d}
+.dark .price small{color:rgba(244,247,251,.5)}
+.pick{margin-top:calc(20*var(--u));height:calc(52*var(--u));border-radius:calc(13*var(--u));background:#16191f;color:#fff;font-size:calc(16*var(--u));letter-spacing:.02em;display:flex;align-items:center;justify-content:center;gap:8px;transition:transform .3s cubic-bezier(.3,1.6,.5,1),background .3s}
+.pick:hover{transform:scale(1.03);background:#2b3140}
+.dark .pick{background:var(--accent)}
+.dark .pick:hover{background:#ff6d33}
+[hidden]{display:none!important}
+.seg{display:flex;gap:calc(4*var(--u));margin-top:calc(22*var(--u));padding:calc(4*var(--u));border-radius:calc(12*var(--u));background:rgba(17,20,24,.06)}
+.dark .seg{background:rgba(255,255,255,.07)}
+.seg button{flex:1;height:calc(36*var(--u));border-radius:calc(9*var(--u));font-size:calc(14*var(--u));font-weight:500;color:#5a616c;transition:background .25s,color .25s}
+.dark .seg button{color:rgba(244,247,251,.6)}
+.seg button.on{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(20,30,60,.12)}
+.dark .seg button.on{background:#f4f7fb;color:var(--ink)}
+.price b em{font-style:normal;font-weight:500;font-size:.5em;margin-left:2px;opacity:.6}
+.more-opt{margin-top:calc(16*var(--u));font-size:calc(14*var(--u));line-height:1.4;color:#6b727d}
+.dark .more-opt{color:rgba(244,247,251,.55)}
+.rows{list-style:none;margin-top:calc(26*var(--u));padding-top:calc(10*var(--u));border-top:1px solid rgba(17,20,24,.08);flex:1}
+.rows li{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:calc(11*var(--u)) 0;border-bottom:1px dashed rgba(17,20,24,.1);font-size:calc(16*var(--u));line-height:1.3}
+.rows li b{font-weight:600;white-space:nowrap;font-variant-numeric:tabular-nums}
+.pk-fine{margin-top:calc(28*var(--u));text-align:center;font-size:calc(14*var(--u));line-height:1.5;color:#7a818c;max-width:calc(900*var(--u));margin-left:auto;margin-right:auto}
+.pk-note{margin-top:calc(36*var(--u));text-align:center;font-size:calc(18*var(--u));color:#5a616c}
+.pk-note a{color:var(--ink);font-weight:600;border-bottom:1.5px solid var(--accent);padding-bottom:2px}
+
+/* ---------- Process ---------- */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:calc(20*var(--u))}
+.step{border-top:1.5px solid rgba(17,20,24,.14);padding-top:calc(22*var(--u))}
+.step-n{font-size:calc(14*var(--u));font-weight:600;color:var(--accent);letter-spacing:.08em}
+.step h4{margin-top:calc(40*var(--u));font-weight:500;font-size:calc(28*var(--u));letter-spacing:-.02em;line-height:1.1}
+.step p{margin-top:calc(12*var(--u));font-size:calc(16.5*var(--u));line-height:1.45;color:#5a616c}
+
+/* ---------- Contact ---------- */
+.contact{margin:0 calc(68*var(--u));padding:calc(80*var(--u)) calc(80*var(--u));border-radius:calc(44*var(--u));background:var(--panel);color:#f4f7fb;display:grid;grid-template-columns:1fr 1.05fr;gap:calc(80*var(--u))}
+.contact .eyebrow{color:rgba(244,247,251,.5)}
+.contact h2{margin-top:calc(18*var(--u));font-weight:500;font-size:calc(96*var(--u));line-height:.96;letter-spacing:-.03em}
+.contact-p{margin-top:calc(24*var(--u));font-size:calc(19*var(--u));line-height:1.45;color:rgba(244,247,251,.62);max-width:calc(440*var(--u))}
+.ctags{display:flex;flex-wrap:wrap;gap:calc(10*var(--u));margin-top:calc(32*var(--u))}
+.ctags span{display:inline-flex;align-items:center;gap:8px;font-size:calc(14*var(--u));padding:calc(8*var(--u)) calc(14*var(--u));border-radius:999px;background:rgba(255,255,255,.06)}
+.live-dot{width:7px;height:7px;border-radius:50%;background:#3ecf6e;box-shadow:0 0 8px #3ecf6e}
+form{display:flex;flex-direction:column;gap:calc(14*var(--u))}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:calc(14*var(--u))}
+label{display:flex;flex-direction:column;gap:calc(8*var(--u));font-size:calc(13*var(--u));font-weight:500;letter-spacing:.04em;color:rgba(244,247,251,.55)}
+input,select,textarea{font:inherit;font-size:calc(16*var(--u));letter-spacing:0;color:#f4f7fb;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:calc(12*var(--u));padding:calc(14*var(--u)) calc(16*var(--u));outline:none;transition:border-color .2s,background .2s;width:100%}
+input:focus,select:focus,textarea:focus{border-color:var(--accent);background:rgba(255,255,255,.09)}
+select option{color:#111418}
+textarea{resize:vertical;min-height:calc(120*var(--u))}
+.send{margin-top:calc(6*var(--u));height:calc(54*var(--u));border-radius:calc(13*var(--u));background:var(--accent);color:#fff;font-size:calc(16*var(--u));font-weight:500;letter-spacing:.02em;transition:transform .3s cubic-bezier(.3,1.6,.5,1),background .3s}
+.send:hover{transform:scale(1.02);background:#ff6d33}
+.hint{min-height:1.3em;font-size:calc(14*var(--u));color:#9fe3b6}
+.hint.err{color:#ff8a6b}
+
+/* ---------- Footer ---------- */
+footer{padding:calc(110*var(--u)) calc(90*var(--u)) calc(40*var(--u))}
+.f-big{font-family:'Kaushan Script',cursive;font-size:calc(220*var(--u));line-height:.9;letter-spacing:-.02em;transform:skewX(-6deg);display:inline-flex;align-items:baseline}
+.f-big i{display:block;width:calc(24*var(--u));height:calc(24*var(--u));border-radius:50%;background:var(--accent);margin-left:calc(14*var(--u))}
+.f-row{margin-top:calc(50*var(--u));padding-top:calc(24*var(--u));border-top:1px solid rgba(17,20,24,.1);display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;font-size:calc(15*var(--u));color:#5a616c}
+.f-links{display:flex;gap:calc(28*var(--u));flex-wrap:wrap}
+.f-links a:hover,.f-up:hover{color:var(--ink)}
+
+/* ---------- Phone ---------- */
+@media (max-width:820px){
+  :root{--u:calc(100vw / 390)}
+  .hero{--u:calc(100vw / 390);height:100svh}
+  #loader p{font-size:22px;text-align:center}
+  .hdr{top:12px;left:12px;right:12px}
+  .pill{height:46px;border-radius:12px}
+  .pill-l,.hdr.compact .pill-l{width:128px;padding:0 10px 0 14px}
+  .logo{font-size:22px}.logo i{width:3px;height:3px;margin-left:2px}
+  .nav{display:none}
+  .more{width:22px;height:22px}.more svg{width:4px;height:16px}
+  .pill-r{height:46px;margin-top:0;gap:12px;font-size:14px;padding:0 6px 0 14px}
+  .chip{border-radius:8px;padding:7px 12px}
+  .menu{top:66px;left:12px;right:12px}
+  .hero-c{flex-direction:column;align-items:flex-start;justify-content:flex-end;gap:0;padding:0 20px 30svh}
+  .h1{font-size:12.6vw;line-height:.96}
+  .hero-r{padding-bottom:0}
+  .sub{font-size:16px;margin-top:16px}
+  .btn{height:44px;font-size:15px;padding:0 24px;border-radius:12px;margin-top:22px}
+  .ticker{padding:44px 0 16px}
+  .cap{font-size:14px;padding:0 24px}
+  .marq{margin-top:28px}
+  .list{gap:48px;padding-right:48px}
+  .list li{height:32px;font-size:22px}
+  .w3,.w4,.w5{font-size:19px!important}
+  .tl-wrap{padding:72px 12px 20px}
+  .tl{aspect-ratio:1372/640}
+  .tl-panel{border-radius:16px}
+  .tl-pause{width:17px;height:17px;border-radius:5px;left:1.6%;top:3.4%}
+  .tl-pause svg{width:5px;height:6px}
+  .tl-ruler{height:14px;top:4.6%}
+  .tl-ruler b{font-size:8px}
+  .tl-ruler i{height:5px}
+  .tl-ruler i:nth-of-type(even){display:none}
+  .lane{border-radius:7px}
+  .vlab{font-size:8px;left:2.4%}
+  .playhead span{font-size:7.5px;padding:3px 4px;border-radius:4px}
+  .stmt{padding:56px 18px 90px}
+  .stmt h2{font-size:8.4vw;line-height:1.12}
+  .stmt h2 br{display:none}
+  .st-slot{width:1.15em;height:1.15em;margin:-.05em .2em -.2em .2em}
+  .sec{padding:72px 20px}
+  .sec-head{flex-direction:column;align-items:flex-start;gap:18px;margin-bottom:36px}
+  .eyebrow{font-size:12px;gap:8px}.eyebrow::before{width:7px;height:7px}
+  .sec h2{font-size:44px;margin-top:12px}
+  .sec-intro{font-size:16px;max-width:none}
+  .cards{grid-template-columns:1fr;gap:16px}
+  .card{border-radius:24px;padding:26px}
+  .card-num{font-size:12px}
+  .ctile{width:60px;height:60px;--glow:9px}
+  .tag{font-size:12px;padding:5px 11px;margin-top:18px}
+  .card h3{font-size:34px;margin-top:14px}
+  .lead{font-size:15.5px}
+  .chips span{font-size:12.5px;padding:5px 10px}
+  .chips{gap:6px;margin-top:16px}
+  .feat{gap:10px;margin-top:20px;padding-top:18px}
+  .feat li{font-size:15px;padding-left:26px}
+  .feat li::before{width:17px;height:17px;top:1px}
+  .price b{font-size:28px}.price small{font-size:13px}
+  .pick{height:48px;font-size:15px;border-radius:12px}
+  .pk-note{font-size:15px;margin-top:28px}
+  .seg{margin-top:18px;padding:4px;border-radius:12px;gap:4px}
+  .seg button{height:36px;font-size:14px;border-radius:9px}
+  .more-opt,.pk-fine{font-size:13px}
+  .rows li{font-size:14.5px;padding:10px 0}
+  .steps{grid-template-columns:1fr 1fr;gap:28px 16px}
+  .step h4{font-size:21px;margin-top:20px}
+  .step p{font-size:14.5px}
+  .step-n{font-size:12px}
+  .contact{margin:0 12px;padding:36px 22px;border-radius:24px;grid-template-columns:1fr;gap:36px}
+  .contact h2{font-size:52px}
+  .contact-p{font-size:16px}
+  .ctags span{font-size:13px;padding:7px 12px}
+  .frow{grid-template-columns:1fr}
+  form{gap:12px}
+  label{font-size:12.5px;gap:7px}
+  input,select,textarea{font-size:16px;padding:13px 14px;border-radius:12px}
+  textarea{min-height:110px}
+  .send{height:50px;font-size:15px;border-radius:12px}
+  .hint{font-size:14px}
+  footer{padding:64px 20px 28px}
+  .f-big{font-size:84px}.f-big i{width:10px;height:10px;margin-left:6px}
+  .f-row{font-size:13.5px;flex-direction:column;align-items:flex-start}
+  .f-links{gap:16px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition:none!important}
+  #loader{display:none}
+}
+</style>
 </head>
 <body>
 
-<div id="cursor"></div>
+<!-- squircle clip (superellipse n = 4.2, 160 pts, filled by script) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <clipPath id="squircle" clipPathUnits="objectBoundingBox"><path id="squirclePath" d=""/></clipPath>
+</svg>
 
 <!-- LOADER -->
-<div id="loader">
-  <div class="ldr-label">TB PLAN — LOADING</div>
-  <div class="ldr-center"><div class="ldr-word"><span id="loaderWord">Design</span></div></div>
-  <div class="ldr-bottom"><div class="ldr-counter" id="loaderCounter">000</div></div>
-  <div class="ldr-bar"><div class="ldr-fill" id="loaderFill"></div></div>
+<div id="loader" aria-hidden="true"><p><span>Санаагаа дэлгэцэнд гаргацгаая.</span></p></div>
+
+<!-- HEADER -->
+<header class="hdr" id="hdr">
+  <div class="pill pill-l">
+    <a class="logo" href="#top" aria-label="TB Plan нүүр">TB Plan<i></i></a>
+    <nav class="nav" aria-label="Үндсэн цэс">
+      <a href="#uilchilgee">Үйлчилгээ</a>
+      <a href="#bagts">Багцууд</a>
+      <a href="#yavts">Ажлын явц</a>
+      <a href="#contact">Холбоо барих</a>
+    </nav>
+    <button class="more" id="moreBtn" aria-label="Цэс" aria-expanded="false" aria-controls="menu">
+      <svg viewBox="0 0 4 16" aria-hidden="true"><circle cx="2" cy="2" r="2"/><circle cx="2" cy="14" r="2"/></svg>
+    </button>
+  </div>
+  <div class="pill pill-r">
+    <a href="#bagts">Багцууд</a>
+    <a class="chip" href="#contact">Үнийн санал авах</a>
+  </div>
+</header>
+<div class="menu" id="menu">
+  <a href="#uilchilgee">Үйлчилгээ</a>
+  <a href="#bagts">Багцууд</a>
+  <a href="#yavts">Ажлын явц</a>
+  <a href="#contact">Холбоо барих</a>
 </div>
 
-<!-- NAV -->
-<nav>
-  <div class="nav-pill lg" id="navPill">
-    <div class="nav-left-m">
-      <span class="nav-brand">TB Plan</span>
-    </div>
-    <div class="nav-links">
-      <a class="nav-link" href="#about"   data-i="nav.about">Бидний тухай</a>
-      <a class="nav-link" href="#services" data-i="nav.services">Үйлчилгээ</a>
-      <a class="nav-link" href="#details"  data-i="nav.directions">Чиглэлүүд</a>
-      <a class="nav-link" href="#contact"  data-i="nav.contact">Холбоо барих</a>
-    </div>
-    <div class="nav-right-m">
-      <button class="nav-cta-btn nav-cta-inline" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})" data-i="nav.cta.btn">Холбоо барих</button>
-      <button class="lang-btn" id="langBtn"><span id="langFlag">🇨🇳</span><span id="langLabel">中文</span></button>
-    </div>
-  </div>
-</nav>
-
-<!-- HERO -->
-<section id="hero">
-  <video id="hero-video" autoplay loop muted playsinline>
-    <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260403_050628_c4e32401-fab4-4a27-b7a8-6e9291cd5959.mp4" type="video/mp4"/>
-  </video>
-  <div class="hero-layout">
-    <div class="hero-nav" style="height:5rem"></div>
-    <div class="hero-body">
-      <div class="hero-grid">
-        <div>
-          <h1 class="hero-h1" id="heroH1" data-hero-key="hero.h1"></h1>
-          <p class="hero-sub" id="heroSub" data-i="hero.sub"></p>
-          <div class="hero-btns" id="heroBtns">
-            <button class="btn-w" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})" data-i="hero.btn1">Чиглэлүүд харах</button>
-            <button class="btn-g lg" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})" data-i="hero.btn2">Холбоо барих ↗</button>
-          </div>
-        </div>
-        <div class="hero-tag-col">
-          <div class="hero-tag lg" id="heroTag">
-            <p data-i="hero.tag">Дижитал. Дизайн. Медиа.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="scroll-hint"><span>Scroll</span><div class="scroll-line"></div></div>
-</section>
-
-<!-- SERVICES -->
-<section id="services" class="section reveal section-light" style="background:#fff">
-  <div class="container">
-    <div class="section-head">
-      <div class="eyebrow-row"><div class="eyebrow-line"></div><span class="eyebrow-text" data-i="eyebrow.services"></span></div>
-      <h2 class="section-h2"><span data-i="services.h2.a">Манай</span> <em data-i="services.h2.b">үйлчилгээнүүд</em></h2>
-      <p class="section-sub" data-i="services.p"></p>
-    </div>
-    <div class="bento">
-      <a class="bcard bcard--wide" href="web.html">
-        <div class="bcard__bg" style="background-image:url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80')"></div>
-        <div class="bcard__overlay"></div>
-        <div class="bcard__hover-badge"><div class="badge-pill" data-i="card.web.h3"></div></div>
-        <div class="bcard__content"><div class="bcard__num">01</div><h3 class="bcard__h3" data-i="card.web.h3"></h3><p class="bcard__p" data-i="card.web.p"></p><span class="bcard__link" data-i="card.link"></span></div>
-      </a>
-      <a class="bcard bcard--narrow" href="design.html">
-        <div class="bcard__bg" style="background-image:url('https://images.unsplash.com/photo-1501183638710-841dd1904471?auto=format&fit=crop&w=1200&q=80')"></div>
-        <div class="bcard__overlay"></div>
-        <div class="bcard__hover-badge"><div class="badge-pill" data-i="card.interior.h3"></div></div>
-        <div class="bcard__content"><div class="bcard__num">02</div><h3 class="bcard__h3" data-i="card.interior.h3"></h3><p class="bcard__p" data-i="card.interior.p"></p><span class="bcard__link" data-i="card.link"></span></div>
-      </a>
-      <a class="bcard bcard--third" href="media.html">
-        <div class="bcard__bg" style="background-image:url('https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=1200&q=80')"></div>
-        <div class="bcard__overlay"></div>
-        <div class="bcard__hover-badge"><div class="badge-pill" data-i="card.media.h3"></div></div>
-        <div class="bcard__content"><div class="bcard__num">03</div><h3 class="bcard__h3" data-i="card.media.h3"></h3><p class="bcard__p" data-i="card.media.p"></p><span class="bcard__link" data-i="card.link"></span></div>
-      </a>
-      <a class="bcard bcard--third" href="#materials">
-        <div class="bcard__bg" style="background-image:url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1200&q=80')"></div>
-        <div class="bcard__overlay"></div>
-        <div class="bcard__hover-badge"><div class="badge-pill" data-i="card.materials.h3"></div></div>
-        <div class="bcard__content"><div class="bcard__num">04</div><h3 class="bcard__h3" data-i="card.materials.h3"></h3><p class="bcard__p" data-i="card.materials.p"></p><span class="bcard__link" data-i="card.link"></span></div>
-      </a>
-      <a class="bcard bcard--narrow" href="#foods">
-        <div class="bcard__bg" style="background-image:url('https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=80')"></div>
-        <div class="bcard__overlay"></div>
-        <div class="bcard__hover-badge"><div class="badge-pill" data-i="card.food.h3"></div></div>
-        <div class="bcard__content"><div class="bcard__num">05</div><h3 class="bcard__h3" data-i="card.food.h3"></h3><p class="bcard__p" data-i="card.food.p"></p><span class="bcard__link" data-i="card.link"></span></div>
-      </a>
+<main>
+<!-- 1. HERO -->
+<section class="hero" id="top">
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
+  <div class="hero-c">
+    <h1 class="h1"><span class="mask"><span>Вэб. Сошиал.<br>Контент.</span></span></h1>
+    <div class="hero-r">
+      <p class="sub">Бизнесээ онлайнд өсгөх<br>гурван багц — нэг баг.</p>
+      <a class="btn" href="#bagts">Багц сонгох</a>
     </div>
   </div>
 </section>
 
-<!-- ABOUT -->
-<section id="about" class="section reveal section-light" style="background:#f7f7f5;border-top:1px solid #eee;border-bottom:1px solid #eee">
-  <div class="container">
-    <div class="section-head">
-      <div class="eyebrow-row"><div class="eyebrow-line"></div><span class="eyebrow-text" data-i="eyebrow.about"></span></div>
-      <h2 class="section-h2">TB Plan — <em data-i="about.h2.em">Бидний тухай</em></h2>
-      <p class="section-sub" data-i="about.sub"></p>
-    </div>
-    <div class="two-col">
-      <div class="panel">
-        <h3 data-i="about.p1.h3"></h3>
-        <p data-i="about.p1.p"></p>
-        <ul>
-          <li data-i="about.l1"></li><li data-i="about.l2"></li>
-          <li data-i="about.l3"></li><li data-i="about.l4"></li>
-          <li data-i="about.l5"></li>
-        </ul>
-        <div class="pill-row">
-          <span class="pill" data-i="pill.research"></span>
-          <span class="pill" data-i="pill.plan"></span>
-          <span class="pill" data-i="pill.design"></span>
-          <span class="pill" data-i="pill.prod"></span>
-        </div>
-      </div>
-      <div class="panel">
-        <h3 data-i="about.p2.h3"></h3>
-        <p data-i="about.p2.p"></p>
-        <div class="process-steps">
-          <div class="step"><div class="step-dot">01</div><div class="step-label" data-i="step.1"></div></div>
-          <div class="step"><div class="step-dot">02</div><div class="step-label" data-i="step.2"></div></div>
-          <div class="step"><div class="step-dot">03</div><div class="step-label" data-i="step.3"></div></div>
-          <div class="step"><div class="step-dot">04</div><div class="step-label" data-i="step.4"></div></div>
-        </div>
-      </div>
+<!-- 2. TICKER -->
+<section class="ticker" aria-label="Бидний хийдэг зүйлс">
+  <p class="cap">Таны брэндэд зориулж бидний хийдэг зүйлс</p>
+  <div class="marq">
+    <div class="track" id="track">
+      <ul class="list">
+        <li class="w1">ВЭБ САЙТ</li>
+        <li class="w2">Reels</li>
+        <li class="w3">CHATBOT</li>
+        <li class="w4">POSTER</li>
+        <li class="w5">КОНТЕНТ</li>
+        <li class="w6">Page хөтлөлт</li>
+        <li class="w1">SEO</li>
+        <li class="w2">Branding</li>
+      </ul>
     </div>
   </div>
 </section>
 
-<!-- DETAIL SLIDER -->
-<section id="details" class="reveal">
-  <div class="slider-wrap">
-    <button class="slide-btn-prev" id="prevSlide">‹</button>
-    <button class="slide-btn-next" id="nextSlide">›</button>
-    <div class="slider-track" id="sliderTrack">
-      <div class="slide is-active" id="web" style="min-height:78vh;display:flex;align-items:center;justify-content:center;text-align:center">
-        <div class="slide-bg" style="background-image:url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=2400&q=80')"></div>
-        <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.22),rgba(0,0,0,.72))"></div>
-        <div class="slide-inner"><div class="slide-num">01 / 05</div><h2 class="slide-h2" data-i="slide.web.h2"></h2><p class="slide-p" data-i="slide.web.p"></p><ul class="slide-bullets"><li data-i="slide.web.l1"></li><li data-i="slide.web.l2"></li><li data-i="slide.web.l3"></li></ul></div>
-      </div>
-      <div class="slide" id="interior" style="min-height:78vh;display:flex;align-items:center;justify-content:center;text-align:center">
-        <div class="slide-bg" style="background-image:url('https://images.unsplash.com/photo-1501183638710-841dd1904471?auto=format&fit=crop&w=2400&q=80')"></div>
-        <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.22),rgba(0,0,0,.72))"></div>
-        <div class="slide-inner"><div class="slide-num">02 / 05</div><h2 class="slide-h2" data-i="slide.interior.h2"></h2><p class="slide-p" data-i="slide.interior.p"></p><ul class="slide-bullets"><li data-i="slide.interior.l1"></li><li data-i="slide.interior.l2"></li><li data-i="slide.interior.l3"></li></ul></div>
-      </div>
-      <div class="slide" id="media" style="min-height:78vh;display:flex;align-items:center;justify-content:center;text-align:center">
-        <div class="slide-bg" style="background-image:url('https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=2400&q=80')"></div>
-        <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.22),rgba(0,0,0,.72))"></div>
-        <div class="slide-inner"><div class="slide-num">03 / 05</div><h2 class="slide-h2" data-i="slide.media.h2"></h2><p class="slide-p" data-i="slide.media.p"></p><ul class="slide-bullets"><li data-i="slide.media.l1"></li><li data-i="slide.media.l2"></li><li data-i="slide.media.l3"></li></ul></div>
-      </div>
-      <div class="slide" id="materials" style="min-height:78vh;display:flex;align-items:center;justify-content:center;text-align:center">
-        <div class="slide-bg" style="background-image:url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=2400&q=80')"></div>
-        <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.22),rgba(0,0,0,.72))"></div>
-        <div class="slide-inner"><div class="slide-num">04 / 05</div><h2 class="slide-h2" data-i="slide.materials.h2"></h2><p class="slide-p" data-i="slide.materials.p"></p><ul class="slide-bullets"><li data-i="slide.materials.l1"></li><li data-i="slide.materials.l2"></li><li data-i="slide.materials.l3"></li></ul></div>
-      </div>
-      <div class="slide" id="foods" style="min-height:78vh;display:flex;align-items:center;justify-content:center;text-align:center">
-        <div class="slide-bg" style="background-image:url('https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=2400&q=80')"></div>
-        <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.22),rgba(0,0,0,.72))"></div>
-        <div class="slide-inner"><div class="slide-num">05 / 05</div><h2 class="slide-h2" data-i="slide.food.h2"></h2><p class="slide-p" data-i="slide.food.p"></p><ul class="slide-bullets"><li data-i="slide.food.l1"></li><li data-i="slide.food.l2"></li><li data-i="slide.food.l3"></li></ul></div>
-      </div>
+<!-- 3. TIMELINE → STATEMENT -->
+<section class="tls" id="uilchilgee">
+  <div class="tl-wrap">
+    <div class="tl" id="tl">
+      <div class="tl-panel"></div>
+      <button class="tl-pause" id="pauseBtn" aria-label="Түр зогсоох">
+        <svg viewBox="0 0 11 12" id="pauseIcon"><rect x="0" y="0" width="3.6" height="12" rx="1"/><rect x="7.4" y="0" width="3.6" height="12" rx="1"/></svg>
+      </button>
+      <div class="tl-ruler" id="ruler"></div>
+      <div class="lane v1"></div><div class="lane v2"></div>
+      <span class="vlab" style="top:32.5%">V1</span><span class="vlab" style="top:72.5%">V2</span>
+
+      <div class="tl-slot t1" style="left:9.5%"><div class="tl-block"><div class="tile tp1" data-src="0"><canvas></canvas></div></div></div>
+      <div class="tl-slot t2" style="left:22.9%"><div class="tl-block"><div class="tile tp6" data-src="5"><canvas></canvas></div></div></div>
+      <div class="tl-slot t1" style="left:34.1%"><div class="tl-block"><div class="tile tp3" data-src="2"><canvas></canvas></div></div></div>
+      <div class="tl-slot t2" style="left:50.6%"><div class="tl-block"><div class="tile tp4" data-src="3"><canvas></canvas></div></div></div>
+      <div class="tl-slot t1" style="left:66.2%"><div class="tl-block"><div class="tile tp5" data-src="4"><canvas></canvas></div></div></div>
+
+      <div class="playhead" id="playhead" style="left:43.84%"><span id="tc">00:02.40</span></div>
     </div>
-    <div class="slider-dots" id="sliderDots"></div>
+  </div>
+
+  <div class="stmt">
+    <h2 id="stmt">TB Plan<span class="st-slot"></span> таны бизнест вэб<span class="st-slot"></span> сайт,<br>
+      сошиал хуудас<span class="st-slot"></span> хөтлөлт, reel<span class="st-slot"></span> болон<br>
+      постер<span class="st-slot"></span> контентыг нэг дор бүтээнэ.</h2>
+  </div>
+  <div class="st-spacer"></div>
+</section>
+
+<!-- 4. PACKAGES -->
+<section class="sec" id="bagts">
+  <div class="sec-head" data-reveal>
+    <div>
+      <span class="eyebrow">Багцууд</span>
+      <h2>Гурван багц.<br>Нэг баг.</h2>
+    </div>
+    <p class="sec-intro">Small, medium, enterprise гэж ангилахын оронд бид бизнесийн тань бодит хэрэгцээнд төвлөрсөн гурван үйлчилгээ санал болгодог.</p>
+  </div>
+
+  <div class="cards">
+    <article class="card" data-reveal data-card>
+      <div class="card-top"><span class="card-num">01</span><div class="ctile"><div class="tile tp3"></div></div></div>
+      <span class="tag">Вэб</span>
+      <h3>Вэб сайт</h3>
+      <p class="lead">Бизнесээ онлайнд танилцуулж, хүсэлт авах 5–7 хуудастай танилцуулга сайт.</p>
+      <div class="seg" role="tablist" aria-label="Төлбөрийн хэлбэр">
+        <button class="on" data-v="once" role="tab" aria-selected="true">Нэг дор</button>
+        <button data-v="monthly" role="tab" aria-selected="false">Сар бүр</button>
+      </div>
+      <ul class="feat">
+        <li>5–7 хуудас, гар утсанд бүрэн тохирсон</li>
+        <li>Хайлтын (SEO) суурь тохиргоо</li>
+        <li>Холбоо барих маягт</li>
+        <li>Хостинг, SSL, өдөр бүрийн нөөцлөлт</li>
+        <li>Сард 2 цаг хүртэл жижиг засвар</li>
+        <li>Хийх хугацаа 2–3 долоо хоног</li>
+      </ul>
+      <p class="more-opt">CRM-тэй сайт 5,500,000₮ · ERP холболттой 12,000,000₮-өөс</p>
+      <div class="price" data-show="once"><b>2,500,000₮</b><small>+ сарын арчилгаа 150,000₮</small></div>
+      <div class="price" data-show="monthly" hidden><b>350,000₮<em>/сар</em></b><small>эхлэх 800,000₮ · 12 сарын гэрээ</small></div>
+      <a class="pick" href="#contact" data-pkg="web">Энэ багцыг сонгох →</a>
+    </article>
+
+    <article class="card dark" data-reveal data-card>
+      <div class="card-top"><span class="card-num">02</span><div class="ctile"><div class="tile tp1"></div></div></div>
+      <span class="tag">Санал болгох</span>
+      <h3>Вэб + Сошиал</h3>
+      <p class="lead">Вэб сайт, сошиал хуудас, чатбот — бүгд нэг дор, тусад нь авахаас хямд.</p>
+      <div class="seg" role="tablist" aria-label="Багцын түвшин">
+        <button data-v="s" role="tab" aria-selected="false">Эхлэл</button>
+        <button class="on" data-v="m" role="tab" aria-selected="true">Өсөлт ★</button>
+        <button data-v="l" role="tab" aria-selected="false">Бүрэн</button>
+      </div>
+      <ul class="feat" data-show="s" hidden>
+        <li>Танилцуулга сайт</li>
+        <li>Сард 8 контент, үүнээс 2 reel</li>
+        <li>Энгийн чатбот (Messenger)</li>
+        <li>Контент төлөвлөгөө, сэтгэгдэлд хариулах</li>
+        <li>Сарын тайлан</li>
+      </ul>
+      <ul class="feat" data-show="m">
+        <li>Харилцагчийн бүртгэлтэй (CRM) сайт</li>
+        <li>Сард 12 контент, үүнээс 4 reel</li>
+        <li>AI чатбот + чатад хүн хариулах</li>
+        <li>Зарын удирдлага</li>
+        <li>Сард 1 зураг авалтын өдөр</li>
+        <li>Тайлан + сарын уулзалт</li>
+      </ul>
+      <ul class="feat" data-show="l" hidden>
+        <li>Дотоод систем (ERP)-тэй холбосон сайт</li>
+        <li>Сард 20 контент, үүнээс 8 reel + 8 story</li>
+        <li>AI чатбот + чатад хүн хариулах</li>
+        <li>Зарын удирдлага, 3 суваг</li>
+        <li>Сард 2 зураг авалтын өдөр</li>
+        <li>Тайлан + сард 2 уулзалт</li>
+      </ul>
+      <p class="more-opt" data-show="s" hidden>Шинээр онлайнд гарч буй жижиг бизнест · сард 200,000₮ хэмнэнэ</p>
+      <p class="more-opt" data-show="m">Харилцагчийн хүсэлт татах байгууллагад · сард 400,000₮ хэмнэнэ</p>
+      <p class="more-opt" data-show="l" hidden>Олон салбар, дотоод системтэй компанид · сард 550,000₮ хэмнэнэ</p>
+      <div class="price" data-show="s" hidden><b>2,100,000₮<em>/сар</em></b><small>эхлэх 1,500,000₮ · 12 сарын гэрээ</small></div>
+      <div class="price" data-show="m"><b>4,200,000₮<em>/сар</em></b><small>эхлэх 3,000,000₮ · 12 сарын гэрээ</small></div>
+      <div class="price" data-show="l" hidden><b>5,700,000₮<em>/сар-аас</em></b><small>эхлэх 13,000,000₮-өөс · 12 сарын гэрээ</small></div>
+      <a class="pick" href="#contact" data-pkg="web-social">Энэ багцыг сонгох →</a>
+    </article>
+
+    <article class="card" data-reveal>
+      <div class="card-top"><span class="card-num">03</span><div class="ctile"><div class="tile tp5"></div></div></div>
+      <span class="tag">Контент</span>
+      <h3>Контент багц</h3>
+      <p class="lead">Reel болон постероо хэрэгтэй тоогоороо, нэгжийн үнээр захиалаарай.</p>
+      <ul class="rows">
+        <li><span>Дизайнтай пост / постер</span><b>150,000₮</b></li>
+        <li><span>Reel — танай бичлэгээр монтаж</span><b>300,000₮</b></li>
+        <li><span>Зураг авалтын өдөр (4 цаг)</span><b>500,000₮</b></li>
+        <li><span>Story, 8 ширхэг</span><b>200,000₮</b></li>
+        <li><span>Танилцуулга видео (60–90 сек)</span><b>1,500,000₮</b></li>
+      </ul>
+      <p class="more-opt">Тогтмол авбал сошиал хөтлөлт 1,800,000₮/сараас (6 пост + 2 reel)</p>
+      <div class="price"><b>150,000₮</b><small>-өөс эхлэн, нэгжээр</small></div>
+      <a class="pick" href="#contact" data-pkg="content">Энэ багцыг сонгох →</a>
+    </article>
+  </div>
+  <p class="pk-fine" data-reveal>Бүх үнэ НӨАТ-гүй. Зарын зардлыг харилцагч Meta-д шууд төлнө. Эхлэх төлбөрийн 50%-ийг ажил эхлэхэд, 50%-ийг хүлээлгэн өгөхөд төлнө. Сарын арчилгаанд домэйн нэрийн төлбөр орохгүй.</p>
+  <p class="pk-note" data-reveal>Аль багц тохирохыг мэдэхгүй байна уу? <a href="#contact">Бидэнтэй ярилцаад хамтдаа шийдье</a></p>
+</section>
+
+<!-- 5. PROCESS -->
+<section class="sec" id="yavts" style="padding-top:0">
+  <div class="sec-head" data-reveal>
+    <div>
+      <span class="eyebrow">Ажлын явц</span>
+      <h2>Санаанаас —<br>үр дүн хүртэл.</h2>
+    </div>
+    <p class="sec-intro">Хугацаа, ажлын хүрээ, үнэ нь эхнээсээ тодорхой. Явцын тайлан, загварууд, засваруудыг тогтсон стандартаар хүргэнэ.</p>
+  </div>
+  <div class="steps">
+    <div class="step" data-reveal><span class="step-n">01</span><h4>Танилцах</h4><p>Бизнес, зорилго, хэрэгцээг тань сонсож, судална.</p></div>
+    <div class="step" data-reveal><span class="step-n">02</span><h4>Төлөвлөгөө + үнийн санал</h4><p>Хугацаа, ажлын хүрээ, үнийг тодорхой гаргана.</p></div>
+    <div class="step" data-reveal><span class="step-n">03</span><h4>Дизайн → Бүтээл</h4><p>Загвараа батлуулаад гүйцэтгэлдээ орно.</p></div>
+    <div class="step" data-reveal><span class="step-n">04</span><h4>Хүлээлгэн өгөх + дэмжлэг</h4><p>Засвар, тайлантайгаар хүлээлгэн өгч, цаашид хамт ажиллана.</p></div>
   </div>
 </section>
 
-<!-- CONTACT -->
-<section id="contact" class="section reveal section-light" style="background:#fff">
-  <div class="container">
-    <div class="section-head">
-      <div class="eyebrow-row"><div class="eyebrow-line"></div><span class="eyebrow-text" data-i="eyebrow.contact"></span></div>
-      <h2 class="section-h2"><em data-i="contact.h2.a">Ярилцацгаая</em></h2>
-      <p class="section-sub" data-i="contact.sub"></p>
+<!-- 6. CONTACT -->
+<section id="contact" style="scroll-margin-top:90px">
+  <div class="contact" data-reveal>
+    <div>
+      <span class="eyebrow">Холбоо барих</span>
+      <h2>Ярилцацгаая.</h2>
+      <p class="contact-p">Юу хийхийг хүсэж байгаагаа бичээрэй — бид төлөвлөгөө, үнийн саналтайгаар эргэн холбогдоно.</p>
+      <div class="ctags"><span><i class="live-dot"></i>Захиалга авч байна</span><span>Улаанбаатар, Монгол</span></div>
     </div>
-    <div class="contact-grid">
-      <div class="contact-info">
-        <h3 data-i="contact.info.h3"></h3>
-        <p data-i="contact.info.p"></p>
-        <div>
-          <span class="contact-tag"><span class="dot"></span><span data-i="contact.tag.available"></span></span>
-          <span class="contact-tag">📍 Улаанбаатар, Монгол</span>
-          <span class="contact-tag">🌐 mn · zh</span>
-        </div>
+    <form id="contactForm" novalidate>
+      <div class="frow">
+        <label>Нэр<input type="text" name="name" placeholder="Таны нэр" autocomplete="name" required></label>
+        <label>Утас эсвэл и-мэйл<input type="text" name="contact" placeholder="9900 0000" required></label>
       </div>
-      <div class="form-card">
-        <form id="contactForm" novalidate>
-          <div class="form-row">
-            <div class="form-group"><label data-i="form.name"></label><input type="text" name="name" placeholder="Таны нэр" required/></div>
-            <div class="form-group"><label data-i="form.contact"></label><input type="text" name="contact" placeholder="you@email.com" required/></div>
-          </div>
-          <div class="form-group"><label data-i="form.service"></label><select name="service" id="serviceSelect"></select></div>
-          <div class="form-group"><label data-i="form.message"></label><textarea name="message" rows="4" placeholder="Ямар үйлчилгээ хэрэгтэйгээ товч тайлбарлаарай..." required></textarea></div>
-          <button class="btn-submit" type="submit" data-i="form.submit"></button>
-          <div class="form-hint" id="formHint"></div>
-        </form>
-      </div>
-    </div>
+      <label>Багц
+        <select name="service" id="serviceSelect">
+          <option value="">— Сонгоно уу —</option>
+          <option value="web">01 · Вэб сайт</option>
+          <option value="web-social">02 · Вэб + Сошиал</option>
+          <option value="content">03 · Контент багц</option>
+          <option value="other">Бусад / мэдэхгүй байна</option>
+        </select>
+      </label>
+      <label>Мессеж<textarea name="message" placeholder="Ямар үйлчилгээ хэрэгтэйгээ товч бичээрэй..." required></textarea></label>
+      <button class="send" type="submit">Илгээх</button>
+      <p class="hint" id="formHint" role="status"></p>
+    </form>
   </div>
 </section>
+</main>
 
-<!-- FOOTER -->
-<footer class="section-light" style="background:#fff;border-top:1px solid #ebebeb">
-  <div class="marquee-wrap">
-    <div class="marquee-track">
-      <span class="marquee-text">TB PLAN • ДИЖИТАЛ • ДИЗАЙН • МЕДИА • ВЭБ • </span>
-      <span class="marquee-text">TB PLAN • ДИЖИТАЛ • ДИЗАЙН • МЕДИА • ВЭБ • </span>
-      <span class="marquee-text">TB PLAN • ДИЖИТАЛ • ДИЗАЙН • МЕДИА • ВЭБ • </span>
-      <span class="marquee-text">TB PLAN • ДИЖИТАЛ • ДИЗАЙН • МЕДИА • ВЭБ • </span>
+<footer>
+  <div class="f-big" aria-hidden="true">TB Plan<i></i></div>
+  <div class="f-row">
+    <div class="f-links">
+      <a href="#bagts" data-pkg="web">Вэб сайт</a>
+      <a href="#bagts" data-pkg="web-social">Вэб + Сошиал</a>
+      <a href="#bagts" data-pkg="content">Контент багц</a>
+      <a href="#contact">Холбоо барих</a>
     </div>
-  </div>
-  <div class="container footer-inner">
-    <div class="footer-brand" style="color:#000">TB Plan</div>
-    <p class="footer-copy">© <span id="year"></span> TB Plan. <span data-i="footer.rights"></span></p>
-    <a class="footer-up" href="#hero" data-i="footer.up" style="color:#aaa"></a>
+    <span>© <span id="year"></span> TB Plan. Бүх эрх хуулиар хамгаалагдсан.</span>
+    <a class="f-up" href="#top">Дээш ↑</a>
   </div>
 </footer>
 
-<script src="index.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+'use strict';
+var RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+var isPhone = function(){ return innerWidth <= 820; };
+gsap.registerPlugin(ScrollTrigger);
+document.getElementById('year').textContent = new Date().getFullYear();
+
+/* ---------- squircle path ---------- */
+(function(){
+  var n = 4.2, N = 160, d = '';
+  for (var i = 0; i < N; i++){
+    var a = i / N * Math.PI * 2, c = Math.cos(a), s = Math.sin(a);
+    var x = .5 + .5 * Math.sign(c) * Math.pow(Math.abs(c), 2 / n);
+    var y = .5 + .5 * Math.sign(s) * Math.pow(Math.abs(s), 2 / n);
+    d += (i ? 'L' : 'M') + x.toFixed(4) + ' ' + y.toFixed(4);
+  }
+  document.getElementById('squirclePath').setAttribute('d', d + 'Z');
+})();
+
+/* ---------- header ---------- */
+var hdr = document.getElementById('hdr');
+var menu = document.getElementById('menu'), moreBtn = document.getElementById('moreBtn');
+function onHdr(){ hdr.classList.toggle('compact', scrollY > 40); }
+addEventListener('scroll', onHdr, {passive:true}); onHdr();
+moreBtn.addEventListener('click', function(e){
+  e.stopPropagation();
+  var o = menu.classList.toggle('open'); moreBtn.setAttribute('aria-expanded', o);
+});
+document.addEventListener('click', function(){ menu.classList.remove('open'); moreBtn.setAttribute('aria-expanded', false); });
+
+/* ---------- loader + entrance ---------- */
+var loader = document.getElementById('loader');
+function entrance(){
+  document.dispatchEvent(new Event('tb:entrance'));
+  if (RM) return;
+  gsap.from('.h1 .mask>span', {yPercent:105, duration:1.2, delay:.35, ease:'expo.out'});
+  gsap.from(['.sub', '.hero-r .btn'], {y:24, opacity:0, duration:1, delay:.55, stagger:.1, ease:'expo.out'});
+  gsap.from('.hdr .pill', {y:-20, opacity:0, duration:.9, delay:.4, stagger:.08, ease:'expo.out'});
+}
+if (RM){
+  loader.remove();
+  window.heroReady.then(entrance);
+} else {
+  var line = loader.querySelector('span');
+  gsap.set(line, {yPercent:110});
+  gsap.to(line, {yPercent:0, duration:.7, delay:.15, ease:'expo.out'});
+  var fired = false;
+  var exit = function(){
+    if (fired) return; fired = true;
+    gsap.timeline({onComplete:function(){ loader.remove(); }})
+      .to(line, {yPercent:-110, duration:.55, ease:'expo.in'})
+      .to(loader, {clipPath:'inset(0 0 100% 0)', duration:.8, ease:'expo.inOut', onStart:entrance}, '-=.15');
+  };
+  Promise.all([window.heroReady, new Promise(function(r){ setTimeout(r, 1400); })]).then(exit);
+  setTimeout(exit, 6000);
+}
+
+/* ---------- ticker ---------- */
+var track = document.getElementById('track');
+var list0 = track.children[0], clone = list0.cloneNode(true);
+clone.setAttribute('aria-hidden', 'true'); track.appendChild(clone);
+var tx = 0, boost = 0, lastSY = scrollY, tVis = false, tLast = performance.now();
+new IntersectionObserver(function(e){ tVis = e[0].isIntersecting; }).observe(track);
+addEventListener('scroll', function(){ boost += Math.abs(scrollY - lastSY) * 2.2; lastSY = scrollY; }, {passive:true});
+function tickTicker(now){
+  var dt = Math.min((now - tLast) / 1000, .1); tLast = now;
+  if (tVis && !RM){
+    var w = list0.offsetWidth;
+    tx -= (70 + boost) * dt * (innerWidth / 1536) * (isPhone() ? 2.4 : 1);
+    if (w > 0 && -tx >= w) tx = -((-tx) % w);
+    track.style.transform = 'translate3d(' + tx + 'px,0,0)';
+  }
+  boost *= Math.pow(.04, dt);
+  requestAnimationFrame(tickTicker);
+}
+requestAnimationFrame(tickTicker);
+
+/* ---------- timeline ---------- */
+var ruler = document.getElementById('ruler'), rh = '';
+for (var s = 0; s <= 6; s++){ rh += '<b>' + s + 's</b>'; if (s < 6) rh += '<i></i><i></i>'; }
+ruler.innerHTML = rh;
+
+var tl = document.getElementById('tl'), sec = document.querySelector('.tls');
+var playhead = document.getElementById('playhead'), tc = document.getElementById('tc');
+var pauseBtn = document.getElementById('pauseBtn'), pauseIcon = document.getElementById('pauseIcon');
+var playing = !RM, t = 2.4, secVis = false;
+var tiles = [].slice.call(document.querySelectorAll('.tl .tile'));
+var K = 1280 / 2418, SRC = [[262,65.5],[922.5,65.5],[1585,65.5],[262,709.5],[922.5,709.5],[1585,709.5]];
+var video = null;
+
+function sizeTiles(){
+  var dpr = Math.min(devicePixelRatio || 1, 2);
+  tiles.forEach(function(el){
+    var w = el.clientWidth, c = el.querySelector('canvas');
+    el.style.setProperty('--glow', (w * .15) + 'px');
+    c.width = c.height = Math.max(1, Math.round(w * dpr));
+  });
+  document.querySelectorAll('.ctile').forEach(function(c){ c.style.setProperty('--glow', (c.clientWidth * .15) + 'px'); });
+}
+function setPlayhead(){
+  playhead.style.left = (8 + 89.6 * t / 6) + '%';
+  var ss = Math.floor(t), cc = Math.floor((t - ss) * 100);
+  tc.textContent = '00:' + String(ss).padStart(2, '0') + '.' + String(cc).padStart(2, '0');
+}
+setPlayhead();
+
+if (!RM){
+  video = document.createElement('video');
+  video.muted = true; video.loop = true; video.playsInline = true; video.crossOrigin = 'anonymous';
+  video.setAttribute('muted', ''); video.setAttribute('playsinline', ''); video.preload = 'auto';
+  video.style.cssText = 'position:absolute;width:1px;height:1px;opacity:0;pointer-events:none';
+  video.src = 'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20261109_065027_c89c0a52-25ea-47a9-9e65-f17ff3ea5daf.mp4';
+  document.body.appendChild(video);
+  video.addEventListener('loadeddata', function(){ tiles.forEach(function(el){ el.classList.add('live'); }); });
+}
+new IntersectionObserver(function(e){
+  secVis = e[0].isIntersecting;
+  if (video){ if (secVis && playing) video.play().catch(function(){}); else video.pause(); }
+}, {rootMargin:'200px'}).observe(sec);
+
+pauseBtn.addEventListener('click', function(){
+  playing = !playing;
+  pauseIcon.innerHTML = playing
+    ? '<rect x="0" y="0" width="3.6" height="12" rx="1"/><rect x="7.4" y="0" width="3.6" height="12" rx="1"/>'
+    : '<path d="M1 .8v10.4a.8.8 0 0 0 1.2.7l8.3-5.2a.8.8 0 0 0 0-1.4L2.2.1A.8.8 0 0 0 1 .8Z"/>';
+  pauseBtn.setAttribute('aria-label', playing ? 'Түр зогсоох' : 'Тоглуулах');
+  if (video){ if (playing) video.play().catch(function(){}); else video.pause(); }
+});
+
+var lLast = performance.now();
+function tickTl(now){
+  var dt = Math.min((now - lLast) / 1000, .1); lLast = now;
+  if (secVis){
+    if (playing){ t += dt; if (t >= 6) t -= 6; setPlayhead(); }
+    if (video && video.readyState >= 2){
+      tiles.forEach(function(el){
+        var c = el.querySelector('canvas'), ctx = c.getContext('2d'), p = SRC[+el.dataset.src];
+        try { ctx.drawImage(video, p[0] * K, p[1] * K, 572 * K, 572 * K, 0, 0, c.width, c.height); } catch(e){}
+      });
+    }
+  }
+  requestAnimationFrame(tickTl);
+}
+requestAnimationFrame(tickTl);
+
+/* ---------- timeline ⇄ statement FLIP ---------- */
+var blocks = [].slice.call(document.querySelectorAll('.tl-block'));
+var tSlots = [].slice.call(document.querySelectorAll('.tl-slot'));
+var sSlots = [].slice.call(document.querySelectorAll('.st-slot'));
+var stmt = document.getElementById('stmt');
+var state = 'timeline', flight = null;
+function target(i){
+  var a = tSlots[i].getBoundingClientRect(), b = sSlots[i].getBoundingClientRect();
+  return { scale:b.width / a.width, x:b.left - a.left + (b.width - a.width) / 2, y:b.top - a.top + (b.height - a.height) / 2 };
+}
+function snap(){
+  if (flight){ flight.kill(); flight = null; }
+  blocks.forEach(function(b, i){
+    gsap.set(b, Object.assign(state === 'sentence' ? target(i) : {x:0, y:0, scale:1}, {rotation:0}));
+  });
+}
+function fly(to){
+  if (state === to) return;
+  state = to;
+  if (RM) return snap();
+  if (flight) flight.kill();
+  var tlm = gsap.timeline();
+  blocks.forEach(function(b, i){
+    var st = to === 'sentence' ? i * .1 : i * .05;
+    var tg = to === 'sentence' ? target(i) : {x:0, y:0, scale:1};
+    tlm.to(b, Object.assign({duration:1.5, ease:'power2.inOut'}, tg), st);
+    tlm.to(b, {rotation:gsap.utils.random(-15, 15), duration:.75, ease:'power2.in'}, st);
+    tlm.to(b, {rotation:0, duration:.75, ease:'power2.out'}, st + .75);
+  });
+  flight = tlm;
+}
+var fy = scrollY;
+addEventListener('scroll', function(){
+  var d = scrollY - fy; fy = scrollY;
+  if (!secVis || d === 0) return;
+  var r = stmt.getBoundingClientRect();
+  if (r.top < innerHeight && r.bottom > 0) fly(d > 0 ? 'sentence' : 'timeline');
+}, {passive:true});
+var lastW = innerWidth;
+addEventListener('resize', function(){
+  sizeTiles();
+  if (innerWidth !== lastW){ lastW = innerWidth; snap(); }
+});
+sizeTiles(); snap();
+if (document.fonts) document.fonts.ready.then(function(){ sizeTiles(); snap(); });
+
+/* first reveal: clip 1 drops onto its track */
+var revealed = false;
+var io = new IntersectionObserver(function(e){
+  if (!e[0].isIntersecting || revealed) return;
+  revealed = true; io.disconnect();
+  if (RM || state !== 'timeline') return;
+  gsap.from(blocks[0].querySelector('.tile'), {y:-300, rotation:15, duration:2, ease:'power1.out'});
+}, {rootMargin:'0px 0px -300px 0px'});
+io.observe(tl);
+
+/* ---------- reveals ---------- */
+if (!RM){
+  gsap.utils.toArray('[data-reveal]').forEach(function(el){
+    gsap.from(el, {y:40, opacity:0, duration:1, ease:'expo.out', scrollTrigger:{trigger:el, start:'top 88%', once:true}});
+  });
+}
+
+/* ---------- package tier / payment toggles ---------- */
+document.querySelectorAll('[data-card]').forEach(function(card){
+  var btns = card.querySelectorAll('.seg button');
+  btns.forEach(function(b){
+    b.addEventListener('click', function(){
+      btns.forEach(function(x){ x.classList.toggle('on', x === b); x.setAttribute('aria-selected', x === b); });
+      card.querySelectorAll('[data-show]').forEach(function(el){ el.hidden = el.dataset.show !== b.dataset.v; });
+    });
+  });
+});
+
+/* ---------- packages → contact ---------- */
+var sel = document.getElementById('serviceSelect');
+document.querySelectorAll('.pick[data-pkg]').forEach(function(a){
+  a.addEventListener('click', function(){ sel.value = a.dataset.pkg; });
+});
+var q = new URLSearchParams(location.search).get('service');
+var MAP = {web:'web', 'web-social':'web-social', social:'web-social', media:'content', content:'content'};
+if (q) sel.value = MAP[q] || 'other';
+
+/* ---------- contact form ---------- */
+var form = document.getElementById('contactForm'), hint = document.getElementById('formHint');
+var NAMES = {web:'Вэб сайт', 'web-social':'Вэб + Сошиал', content:'Контент багц', other:'Бусад'};
+form.addEventListener('submit', function(e){
+  e.preventDefault();
+  var d = Object.fromEntries(new FormData(form).entries());
+  if (!d.name.trim() || !d.contact.trim() || !d.message.trim()){
+    hint.className = 'hint err'; hint.textContent = 'Нэр, холбоо барих мэдээлэл, мессежээ бөглөнө үү.'; return;
+  }
+  hint.className = 'hint';
+  hint.textContent = 'Баярлалаа, ' + d.name.trim() + '! ' + (d.service ? '«' + NAMES[d.service] + '» багцын ' : '') + 'хүсэлтийг тань хүлээн авлаа. Удахгүй холбогдоно.';
+  form.reset();
+});
+})();
+</script>
+
+<!-- 3D keychain -->
+<script type="module">
+import * as THREE from 'three';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+import { FontLoader } from 'three/addons/loaders/FontLoader.js';
+import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
+import RAPIER from 'rapier';
+
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const canvas = document.getElementById('hero-canvas');
+const hero = canvas.parentElement;
+const ready = () => window.__resolveHero && window.__resolveHero();
+
+try { await main(); } catch (e) { console.warn('3D keychain disabled:', e); ready(); }
+
+async function main(){
+  const fontP = new FontLoader().loadAsync('https://cdn.jsdelivr.net/npm/three@0.169.0/examples/fonts/helvetiker_bold.typeface.json').catch(() => null);
+  await RAPIER.init();
+
+  /* renderer / scene */
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true, preserveDrawingBuffer:true });
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  renderer.setClearColor(0xe3e9f2, 0);
+  const scene = new THREE.Scene();
+  const pmrem = new THREE.PMREMGenerator(renderer);
+  scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+  scene.environmentIntensity = 1.05;
+  const rim = new THREE.DirectionalLight(0xffffff, 1.6); rim.position.set(-29, -14.8, -35); rim.target.position.set(0, 2.2, 0);
+  const keyL = new THREE.DirectionalLight(0xffffff, 1.1); keyL.position.set(6, 10, 12);
+  scene.add(rim, rim.target, keyL);
+
+  const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 500);
+  const rig = new THREE.Group(); rig.position.set(0, RM ? 0 : -4, 10); rig.add(camera); scene.add(rig);
+  function resize(){
+    const w = hero.clientWidth, h = hero.clientHeight;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    if (camera.aspect >= 0.9) camera.position.set(0, 1.06, -4.4); else camera.position.set(0, -0.9, 2.2);
+    camera.updateProjectionMatrix();
+  }
+  resize(); addEventListener('resize', resize);
+
+  /* materials */
+  const steel = new THREE.MeshStandardMaterial({ color:0xa9afba, metalness:1, roughness:0.2 });
+  const loopSteel = new THREE.MeshStandardMaterial({ color:0xcfd3da, metalness:1, roughness:0.18 });
+  const cobalt = new THREE.MeshPhysicalMaterial({ color:0x1430e0, roughness:0.12, clearcoat:1, clearcoatRoughness:0.04 });
+  const loop = (y, r = 0.075) => { const m = new THREE.Mesh(new THREE.TorusGeometry(r, r * 0.3, 16, 40).rotateY(Math.PI / 2), loopSteel); m.position.y = y; return m; };
+
+  /* physics */
+  const world = new RAPIER.World({ x:0, y:-9.81, z:0 });
+  world.timestep = 1 / 60;
+  const NONE = 1, TAGS = 2, CHAIN = 4, G = (m, f) => (m << 16) | f;
+  const bodies = [], syncs = [], chains = [], charms = [];
+  const dyn = (x, y, z) => { const b = world.createRigidBody(RAPIER.RigidBodyDesc.dynamic().setTranslation(x, y, z).setLinearDamping(2.3).setAngularDamping(2.9).setCanSleep(true)); bodies.push(b); return b; };
+  const O = { x:0, y:0, z:0 }, QI = { x:0, y:0, z:0, w:1 };
+  const RING_Y = 3.2;
+  const att = th => { const a = (th - 90) * Math.PI / 180; return { x:0.5 * Math.cos(a), y:RING_Y + 0.5 * Math.sin(a) }; };
+
+  const keyring = new THREE.Mesh(new THREE.TorusGeometry(0.5, 0.04, 24, 120), steel);
+  keyring.position.set(0, RING_Y, 0); scene.add(keyring);
+
+  function ringBody(b, r){
+    const body = dyn(b.x, b.y, 0);
+    world.createCollider(RAPIER.ColliderDesc.cuboid(r * r, r, r).setDensity(5).setCollisionGroups(G(CHAIN, TAGS | CHAIN)), body);
+    const m = new THREE.Mesh(new THREE.TorusGeometry(r, r * 0.12, 12, 40).rotateY(Math.PI / 2), steel);
+    scene.add(m); syncs.push({ body, obj:m });
+    return body;
+  }
+
+  function buildCharm(c){
+    const b = att(c.theta);
+    const anchor = world.createRigidBody(RAPIER.RigidBodyDesc.fixed().setTranslation(b.x, b.y, 0));
+    const start = ringBody(b, 0.12);
+    world.createImpulseJoint(RAPIER.JointData.spherical(O, O), anchor, start, true);
+    const links = [];
+    for (let i = 0; i < c.n; i++){
+      const lb = dyn(b.x + 0.5, b.y, 0);
+      world.createCollider(RAPIER.ColliderDesc.ball(0.1).setDensity(1).setCollisionGroups(G(CHAIN, NONE)), lb);
+      if (i === 0) world.createImpulseJoint(RAPIER.JointData.spherical({ x:0, y:-0.12, z:0 }, O), start, lb, true);
+      else world.createImpulseJoint(RAPIER.JointData.rope(c.L, O, O), links[i - 1], lb, true);
+      links.push(lb);
+    }
+    const end = ringBody(b, 0.08);
+    world.createImpulseJoint(RAPIER.JointData.spherical({ x:0, y:-0.08, z:0 }, O), links[links.length - 1], end, true);
+    const body = dyn(b.x, b.y, c.z);
+    world.createCollider(c.collider().setDensity(c.density).setCollisionGroups(G(TAGS, TAGS)), body);
+    world.createImpulseJoint(RAPIER.JointData.fixed(O, QI, { x:0, y:c.offset, z:0 }, QI), end, body, true);
+    const a = (c.phi - 90) * Math.PI / 180;
+    body.addForce({ x:0.7 * Math.cos(a), y:0.7 * Math.sin(a), z:c.z }, true);
+
+    const geo = c.bead ? new THREE.SphereGeometry(0.068, 20, 14) : new THREE.TorusGeometry(0.062, 0.02, 10, 28).scale(1, 1.5, 1);
+    const inst = new THREE.InstancedMesh(geo, c.bead ? cobalt : steel, c.n);
+    inst.frustumCulled = false; scene.add(inst);
+    chains.push({ links, inst, bead:!!c.bead, dirs:links.map(() => new THREE.Vector3(0, -1, 0)) });
+    syncs.push({ body, obj:c.mesh });
+    scene.add(c.mesh);
+    charms.push({ body, start, end });
+  }
+
+  /* --- charm models --- */
+  function holoTexture(){
+    const cv = document.createElement('canvas'); cv.width = 256; cv.height = 320;
+    const g = cv.getContext('2d');
+    const gr = g.createLinearGradient(0, 0, 256, 320);
+    ['#b8f1ff','#c9b8ff','#ffc2ec','#fff1b8','#b8ffd9','#9fc4ff','#e2b8ff'].forEach((c, i, a) => gr.addColorStop(i / (a.length - 1), c));
+    g.fillStyle = gr; g.fillRect(0, 0, 256, 320);
+    g.globalAlpha = 0.18;
+    for (let i = 0; i < 26; i++){
+      g.fillStyle = Math.random() < 0.5 ? '#ffffff' : '#8fa0ff';
+      g.beginPath(); g.ellipse(Math.random() * 256, Math.random() * 320, 10 + Math.random() * 50, 6 + Math.random() * 30, Math.random() * Math.PI, 0, Math.PI * 2); g.fill();
+    }
+    const t = new THREE.CanvasTexture(cv); t.colorSpace = THREE.SRGBColorSpace; return t;
+  }
+  function cassette(){
+    const g = new THREE.Group();
+    g.add(new THREE.Mesh(new RoundedBoxGeometry(0.8, 1.02, 0.15, 5, 0.06), new THREE.MeshPhysicalMaterial({
+      color:0xe9eeff, roughness:0.08, transmission:1, thickness:0.35, ior:1.42,
+      iridescence:1, iridescenceIOR:1.7, iridescenceThicknessRange:[180, 820], clearcoat:1, clearcoatRoughness:0.05 })));
+    g.add(new THREE.Mesh(new RoundedBoxGeometry(0.58, 0.8, 0.05, 4, 0.02), new THREE.MeshPhysicalMaterial({
+      map:holoTexture(), metalness:0.45, roughness:0.18, iridescence:1, iridescenceIOR:1.9, iridescenceThicknessRange:[250, 900], clearcoat:1 })));
+    const win = new THREE.Mesh(new RoundedBoxGeometry(0.2, 0.5, 0.07, 4, 0.02), new THREE.MeshPhysicalMaterial({ color:0x2a3a8c, metalness:0.3, roughness:0.25, clearcoat:1 }));
+    g.add(win);
+    [0.17, -0.17].forEach(y => { const r = new THREE.Mesh(new THREE.TorusGeometry(0.07, 0.026, 12, 32), steel); r.position.set(0, y, 0.03); g.add(r); });
+    g.add(loop(0.59));
+    return g;
+  }
+  function bead(){ return new THREE.Mesh(new THREE.SphereGeometry(0.085, 24, 18), cobalt); }
+  function pearl(){
+    const g = new THREE.Group();
+    g.add(new THREE.Mesh(new THREE.TorusGeometry(0.33, 0.15, 36, 72), new THREE.MeshPhysicalMaterial({
+      color:0xf7f4f2, metalness:0.05, roughness:0.26, iridescence:0.9, iridescenceIOR:1.35, iridescenceThicknessRange:[300, 700],
+      sheen:1, sheenColor:new THREE.Color(0xffe6f6), sheenRoughness:0.4, clearcoat:1, clearcoatRoughness:0.12 })));
+    g.add(loop(0.56));
+    return g;
+  }
+  function letter(font){
+    const g = new THREE.Group();
+    const mat = new THREE.MeshPhysicalMaterial({ color:0xff5512, roughness:0.22, clearcoat:1, clearcoatRoughness:0.06 });
+    let geo;
+    if (font){
+      geo = new TextGeometry('T', { font, size:0.74, depth:0.1, curveSegments:10, bevelEnabled:true, bevelThickness:0.1, bevelSize:0.055, bevelSegments:8 });
+      geo.center();
+    } else geo = new RoundedBoxGeometry(0.7, 0.8, 0.2, 4, 0.06);
+    g.add(new THREE.Mesh(geo, mat));
+    g.add(loop(0.54));
+    return g;
+  }
+  function houseKey(){
+    const s = new THREE.Shape(), P = Math.PI;
+    s.moveTo(0.06, 0.12);
+    s.absarc(0, 0.36, 0.21, -0.32 * P, 1.32 * P, false);
+    s.lineTo(-0.06, 0.12); s.lineTo(-0.06, -0.62); s.lineTo(0.01, -0.7); s.lineTo(0.06, -0.66);
+    [[0.11,-0.6],[0.065,-0.52],[0.11,-0.45],[0.065,-0.37],[0.11,-0.3],[0.065,-0.22],[0.11,-0.14]].forEach(p => s.lineTo(p[0], p[1]));
+    s.lineTo(0.06, -0.08); s.lineTo(0.06, 0.12);
+    const hole = new THREE.Path(); hole.absarc(0, 0.44, 0.055, 0, P * 2, true); s.holes.push(hole);
+    const geo = new THREE.ExtrudeGeometry(s, { depth:0.045, bevelEnabled:true, bevelThickness:0.012, bevelSize:0.012, bevelSegments:3, curveSegments:28 });
+    geo.computeBoundingBox();
+    const bb = geo.boundingBox; geo.translate(0, 0.065, -(bb.min.z + bb.max.z) / 2);
+    const g = new THREE.Group();
+    g.add(new THREE.Mesh(geo, new THREE.MeshPhysicalMaterial({ color:0xe4e6ea, metalness:1, roughness:0.16, clearcoat:0.4 })));
+    g.add(loop(0.6, 0.07));
+    return g;
+  }
+
+  const font = await fontP;
+  const C = RAPIER.ColliderDesc;
+  [
+    { theta:-50, phi:-64, z:-0.2,  collider:() => C.cuboid(0.42, 0.52, 0.15), density:1.4, offset:0.64, n:8,  L:0.06,  mesh:cassette() },
+    { theta:-18, phi:-16, z:0.4,   collider:() => C.ball(0.12),               density:30,  offset:0.22, n:9,  L:0.135, mesh:bead(), bead:true },
+    { theta:14,  phi:10,  z:0.8,   collider:() => C.cuboid(0.5, 0.5, 0.12),   density:1.4, offset:0.62, n:9,  L:0.06,  mesh:pearl() },
+    { theta:40,  phi:46,  z:0.15,  collider:() => C.cuboid(0.42, 0.48, 0.12), density:1.4, offset:0.6,  n:10, L:0.06,  mesh:letter(font) },
+    { theta:84,  phi:88,  z:-0.25, collider:() => C.cuboid(0.22, 0.64, 0.05), density:4,   offset:0.7,  n:9,  L:0.06,  mesh:houseKey() },
+  ].forEach(buildCharm);
+
+  /* --- per-frame helpers --- */
+  const Y = new THREE.Vector3(0, 1, 0), v = new THREE.Vector3(), v2 = new THREE.Vector3(), q = new THREE.Quaternion(), qy = new THREE.Quaternion(), qt = new THREE.Quaternion(), QID = new THREE.Quaternion();
+  const m4 = new THREE.Matrix4(), one = new THREE.Vector3(1, 1, 1), D2R = Math.PI / 180;
+  function limitYaw(body, lim){
+    if (body.isSleeping()) return;
+    const r = body.rotation(); q.set(r.x, r.y, r.z, r.w);
+    v.set(0, 0, 1).applyQuaternion(q);
+    const yaw = Math.atan2(v.x, v.z);
+    if (Math.abs(yaw) > lim){
+      qy.setFromAxisAngle(Y, Math.sign(yaw) * lim - yaw); q.premultiply(qy);
+      body.setRotation({ x:q.x, y:q.y, z:q.z, w:q.w }, false);
+      const av = body.angvel(); body.setAngvel({ x:av.x, y:0, z:av.z }, false);
+    }
+  }
+  function keep(){
+    for (const c of charms){
+      limitYaw(c.start, 15 * D2R); limitYaw(c.end, 12 * D2R); limitYaw(c.body, 12 * D2R);
+      if (!c.body.isSleeping()){
+        const r = c.body.rotation(); q.set(r.x, r.y, r.z, r.w).slerp(QID, 0.001);
+        c.body.setRotation({ x:q.x, y:q.y, z:q.z, w:q.w }, false);
+      }
+    }
+  }
+  function sync(dt){
+    for (const s of syncs){
+      const t = s.body.translation(), r = s.body.rotation();
+      s.obj.position.set(t.x, t.y, t.z); s.obj.quaternion.set(r.x, r.y, r.z, r.w);
+    }
+    const k = Math.min(1, 10 * dt);
+    for (const ch of chains){
+      const L = ch.links, n = L.length;
+      for (let i = 0; i < n; i++){
+        const p = L[i].translation();
+        if (i < n - 1){ const p2 = L[i + 1].translation(); v2.set(p2.x - p.x, p2.y - p.y, p2.z - p.z); }
+        else { const p0 = L[i - 1].translation(); v2.set(p.x - p0.x, p.y - p0.y, p.z - p0.z); }
+        if (v2.lengthSq() > 1e-8){ v2.normalize(); ch.dirs[i].lerp(v2, k).normalize(); }
+        q.setFromUnitVectors(Y, ch.dirs[i]);
+        if (!ch.bead){ qt.setFromAxisAngle(Y, (i * 16 + (i % 2 ? 90 : 0)) * D2R); q.multiply(qt); }
+        m4.compose(v.set(p.x, p.y, p.z), q, one);
+        ch.inst.setMatrixAt(i, m4);
+      }
+      ch.inst.instanceMatrix.needsUpdate = true;
+    }
+  }
+
+  /* --- mouse push field --- */
+  const ptr = { inside:false, ndc:new THREE.Vector2() };
+  addEventListener('pointermove', e => {
+    const r = canvas.getBoundingClientRect();
+    ptr.inside = e.clientY >= r.top && e.clientY <= r.bottom;
+    ptr.ndc.set((e.clientX - r.left) / r.width * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+  }, { passive:true });
+  const ray = new THREE.Raycaster(), plane = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0), P = new THREE.Vector3();
+  function push(dt){
+    if (!ptr.inside || dt > 0.1) return;
+    rig.updateMatrixWorld(true);
+    ray.setFromCamera(ptr.ndc, camera);
+    if (!ray.ray.intersectPlane(plane, P)) return;
+    for (const c of charms){
+      const t = c.body.translation();
+      const dx = t.x - P.x, dy = t.y - P.y, dz = t.z - P.z, d = Math.hypot(dx, dy, dz);
+      if (d > 0 && d < 2){
+        const k = 4.4 * (1 - d / 2) ** 2 * dt / d;
+        c.body.applyImpulse({ x:dx * k, y:dy * k, z:dz * k }, true);
+      }
+    }
+  }
+
+  /* --- entrance --- */
+  document.addEventListener('tb:entrance', () => {
+    if (RM || !window.gsap) return;
+    const prog = { p:0 };
+    const tl = gsap.timeline({ defaults:{ duration:1.5, delay:0.5, ease:'elastic.out(1,1)' } });
+    tl.to(rig.position, { y:0 }, 0);
+    tl.to(prog, { p:1, onUpdate:() => bodies.forEach(b => b.setGravityScale(-0.25, true)),
+      onComplete:() => bodies.forEach(b => b.setGravityScale(1, true)) }, 0);
+  });
+
+  /* --- loop --- */
+  let frozen = false;
+  if (RM){ for (let i = 0; i < 240; i++){ world.step(); keep(); } frozen = true; }
+  let visible = true, acc = 0, last = performance.now(), first = true;
+  new IntersectionObserver(e => { visible = e[0].isIntersecting; }).observe(hero);
+  const STEP = 1 / 60;
+  function frame(now){
+    requestAnimationFrame(frame);
+    const dt = Math.min((now - last) / 1000, 0.1); last = now;
+    if (!visible && !first) return;
+    if (!frozen){
+      acc += dt;
+      while (acc >= STEP){ push(STEP); world.step(); acc -= STEP; }
+      keep();
+    }
+    sync(first || frozen ? 1 : dt);
+    renderer.render(scene, camera);
+    if (first){ first = false; ready(); }
+  }
+  requestAnimationFrame(frame);
+}
+</script>
 </body>
 </html>

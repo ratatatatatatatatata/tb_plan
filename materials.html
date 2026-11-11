@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="mn">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>TB Plan | Барилгын материал</title>
+<link rel="stylesheet" href="index.css"/>
+<style>
+/* Materials page: warm industrial amber accent */
+:root{ --accent-a:#d9963a; --accent-b:#a86f24; }
+#hero-mat{position:relative;height:100vh;display:flex;flex-direction:column;overflow:hidden}
+.hero-mat-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=2400&q=80') center/cover;filter:brightness(.5) saturate(1.05);animation:kbM 16s ease-in-out infinite alternate}
+@keyframes kbM{from{transform:scale(1.03)}to{transform:scale(1.1) translate(-1%,1%)}}
+.hero-overlay-m{position:absolute;inset:0;background:linear-gradient(135deg,rgba(20,15,8,.78),rgba(20,15,8,.3) 60%,rgba(20,15,8,.55))}
+.demo-badge{display:inline-flex;align-items:center;gap:.4rem;padding:.3rem .8rem;border-radius:999px;background:rgba(217,150,58,.14);border:1px solid rgba(217,150,58,.35);font-size:11px;font-weight:600;color:#d9963a;letter-spacing:.08em;text-transform:uppercase;margin-bottom:1rem}
+.prod-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:1.5rem}
+@media(min-width:900px){.prod-grid{grid-template-columns:repeat(4,1fr)}}
+.prod-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:16px;overflow:hidden;transition:.25s;display:flex;flex-direction:column}
+.prod-card:hover{border-color:rgba(217,150,58,.4);transform:translateY(-3px);box-shadow:0 14px 44px rgba(217,150,58,.1)}
+.prod-img{height:150px;overflow:hidden}
+.prod-img img{width:100%;height:100%;object-fit:cover;filter:saturate(.9);transition:transform .45s}
+.prod-card:hover .prod-img img{transform:scale(1.05)}
+.prod-body{padding:1.25rem;display:flex;flex-direction:column;flex:1}
+.prod-card h3{font-size:15px;font-weight:600;letter-spacing:-.02em;color:#f0f0ee;margin-bottom:.35rem}
+.prod-card .pp{font-size:12.5px;color:rgba(240,240,238,.55);line-height:1.6;margin-bottom:.75rem}
+.prod-card ul{list-style:none;padding:0;flex:1}
+.prod-card ul li{font-size:12.5px;color:rgba(240,240,238,.5);padding:.28rem 0;border-bottom:1px solid rgba(255,255,255,.07);padding-left:1rem;position:relative;line-height:1.55}
+.prod-card ul li:last-child{border-bottom:none}
+.prod-card ul li::before{content:'›';position:absolute;left:0;color:#d9963a;font-weight:700}
+.btn-mat{margin-top:1rem;display:block;text-align:center;padding:.6rem;border-radius:9px;font-size:.8125rem;font-weight:600;background:linear-gradient(135deg,#d9963a,#a86f24);color:#fff;text-decoration:none;cursor:none;transition:.2s;font-family:var(--font-body)}
+.btn-mat:hover{opacity:.88;transform:translateY(-1px)}
+.flow-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:1.5rem}
+@media(min-width:900px){.flow-grid{grid-template-columns:repeat(4,1fr)}}
+.flow-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:1.4rem;transition:.25s}
+.flow-card:hover{border-color:rgba(217,150,58,.35)}
+.flow-num{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:rgba(217,150,58,.14);border:1px solid rgba(217,150,58,.4);color:#d9963a;font-size:13px;font-weight:700;margin-bottom:.8rem}
+.flow-card p{font-size:13px;color:rgba(240,240,238,.65);line-height:1.6}
+.cta-box-m{background:rgba(217,150,58,.07);border:1px dashed rgba(217,150,58,.35);border-radius:16px;padding:2.5rem;text-align:center;margin-top:4rem}
+.cta-box-m h3{font-size:clamp(22px,3vw,34px);font-weight:600;letter-spacing:-.03em;color:#f0f0ee;margin-bottom:.75rem}
+.cta-box-m p{font-size:14px;color:rgba(240,240,238,.55);margin-bottom:1.75rem;max-width:48ch;margin-inline:auto}
+@media(max-width:700px){.prod-grid,.flow-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div id="cursor"></div>
+
+<nav>
+  <div class="nav-pill lg" id="navPill">
+    <div class="nav-left-m">
+      <a class="nav-back" href="index.html">←<span class="back-label"> <span data-i="back">Буцах</span></span></a>
+      <div class="nav-div"></div>
+      <span class="nav-brand">TB Plan</span>
+    </div>
+    <div class="nav-links">
+      <a class="nav-link" href="#products" data-i="mat.products.h2">Бүтээгдэхүүнүүд</a>
+      <a class="nav-link" href="#flow"     data-i="mat.flow.h2">Захиалгын урсгал</a>
+      <a class="nav-link" href="index.html#contact" data-i="nav.contact">Холбоо барих</a>
+    </div>
+    <div class="nav-right-m">
+      <a class="nav-cta-inline" style="background:linear-gradient(135deg,#d9963a,#a86f24);color:#fff;border-radius:7px;font-weight:600;text-decoration:none" href="index.html?service=materials#contact" data-i="hero.btn2.mat">Үнийн санал авах</a>
+      <button class="lang-btn" id="langBtn"><span id="langFlag">🇨🇳</span><span id="langLabel">中文</span></button>
+    </div>
+  </div>
+</nav>
+
+<section id="hero-mat">
+  <div class="hero-mat-bg"></div>
+  <div class="hero-overlay-m"></div>
+  <div class="hero-layout">
+    <div style="height:5rem"></div>
+    <div class="hero-body">
+      <div class="hero-grid">
+        <div>
+          <span class="demo-badge">● Demo</span>
+          <p style="font-size:10px;color:#d9963a;text-transform:uppercase;letter-spacing:.35em;font-weight:500;margin-bottom:.8rem" data-i="hero.eyebrow.mat"></p>
+          <h1 class="hero-h1" id="heroH1" data-hero-key="hero.h1.mat"></h1>
+          <p class="hero-sub" id="heroSub" data-i="hero.sub.mat"></p>
+          <div class="hero-btns" id="heroBtns">
+            <a class="btn-w" href="#products" data-i="hero.btn1.mat">Бүтээгдэхүүн үзэх</a>
+            <a class="btn-g lg" href="index.html?service=materials#contact" data-i="hero.btn2.mat">Үнийн санал авах</a>
+          </div>
+        </div>
+        <div class="hero-tag-col">
+          <div class="hero-tag lg" id="heroTag" style="border-color:rgba(217,150,58,.28);background:rgba(217,150,58,.08)">
+            <p data-i="hero.tag.mat">Бетон. Замаск. Хайрга. Дайрга.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint"><span>Scroll</span><div class="scroll-line"></div></div>
+</section>
+
+<section class="section reveal" id="products">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow-row"><div class="eyebrow-line"></div><span class="eyebrow-text">01 — PRODUCTS</span></div>
+      <h2 class="section-h2" style="color:#f0f0ee" data-i="mat.products.h2"></h2>
+      <p class="section-sub" style="color:rgba(240,240,238,.5)" data-i="mat.products.p"></p>
+    </div>
+    <div class="prod-grid">
+      <div class="prod-card">
+        <div class="prod-img"><img src="images/beton.png" alt="Бетон зуурмаг" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1517089596392-fb9a9033e05b?auto=format&fit=crop&w=800&q=80'"/></div>
+        <div class="prod-body">
+          <h3 data-i="mat.p1.h3"></h3><p class="pp" data-i="mat.p1.p"></p>
+          <ul><li data-i="mat.p1.l1"></li><li data-i="mat.p1.l2"></li><li data-i="mat.p1.l3"></li></ul>
+          <a class="btn-mat" href="index.html?service=materials#contact" data-i="mat.order">Захиалах →</a>
+        </div>
+      </div>
+      <div class="prod-card">
+        <div class="prod-img"><img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800&q=80" alt="Цагаан замаск" loading="lazy"/></div>
+        <div class="prod-body">
+          <h3 data-i="mat.p2.h3"></h3><p class="pp" data-i="mat.p2.p"></p>
+          <ul><li data-i="mat.p2.l1"></li><li data-i="mat.p2.l2"></li><li data-i="mat.p2.l3"></li></ul>
+          <a class="btn-mat" href="index.html?service=materials#contact" data-i="mat.order">Захиалах →</a>
+        </div>
+      </div>
+      <div class="prod-card">
+        <div class="prod-img"><img src="https://images.unsplash.com/photo-1518709594023-6eab9bab7b23?auto=format&fit=crop&w=800&q=80" alt="Хайрга" loading="lazy"/></div>
+        <div class="prod-body">
+          <h3 data-i="mat.p3.h3"></h3><p class="pp" data-i="mat.p3.p"></p>
+          <ul><li data-i="mat.p3.l1"></li><li data-i="mat.p3.l2"></li><li data-i="mat.p3.l3"></li></ul>
+          <a class="btn-mat" href="index.html?service=materials#contact" data-i="mat.order">Захиалах →</a>
+        </div>
+      </div>
+      <div class="prod-card">
+        <div class="prod-img"><img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80" alt="Дайрга" loading="lazy"/></div>
+        <div class="prod-body">
+          <h3 data-i="mat.p4.h3"></h3><p class="pp" data-i="mat.p4.p"></p>
+          <ul><li data-i="mat.p4.l1"></li><li data-i="mat.p4.l2"></li><li data-i="mat.p4.l3"></li></ul>
+          <a class="btn-mat" href="index.html?service=materials#contact" data-i="mat.order">Захиалах →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt reveal" id="flow">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow-row"><div class="eyebrow-line"></div><span class="eyebrow-text">02 — PROCESS</span></div>
+      <h2 class="section-h2" style="color:#f0f0ee" data-i="mat.flow.h2"></h2>
+    </div>
+    <div class="flow-grid">
+      <div class="flow-card"><div class="flow-num">01</div><p data-i="mat.f1"></p></div>
+      <div class="flow-card"><div class="flow-num">02</div><p data-i="mat.f2"></p></div>
+      <div class="flow-card"><div class="flow-num">03</div><p data-i="mat.f3"></p></div>
+      <div class="flow-card"><div class="flow-num">04</div><p data-i="mat.f4"></p></div>
+    </div>
+    <div class="cta-box-m reveal">
+      <h3 data-i="mat.cta.h3"></h3>
+      <p data-i="mat.cta.p"></p>
+      <a class="btn-w" href="index.html?service=materials#contact" data-i="mat.cta.btn">Холбоо барих →</a>
+    </div>
+    <p style="margin-top:1.5rem;font-size:11.5px;color:rgba(240,240,238,.35);text-align:center" data-i="demo.note"></p>
+  </div>
+</section>
+
+<footer>
+  <div class="marquee-wrap"><div class="marquee-track">
+    <span class="marquee-text">TB PLAN • БЕТОН • ЗАМАСК • ХАЙРГА • ДАЙРГА • </span>
+    <span class="marquee-text">TB PLAN • БЕТОН • ЗАМАСК • ХАЙРГА • ДАЙРГА • </span>
+    <span class="marquee-text">TB PLAN • БЕТОН • ЗАМАСК • ХАЙРГА • ДАЙРГА • </span>
+  </div></div>
+  <div class="container footer-inner">
+    <div class="footer-brand">TB Plan</div>
+    <p class="footer-copy">© <span id="year"></span> TB Plan • <span data-i="footer.mat"></span></p>
+    <a class="footer-up" href="index.html" data-i="footer.home"></a>
+  </div>
+</footer>
+
+<script src="index.js"></script>
+</body>
+</html>

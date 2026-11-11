@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="mn">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>TB Plan | Хүнс — Импорт, нийлүүлэлт</title>
+<link rel="stylesheet" href="index.css"/>
+<style>
+/* Food page: fresh green accent */
+:root{ --accent-a:#3ecf6e; --accent-b:#249a4d; }
+#hero-fd{position:relative;height:100vh;display:flex;flex-direction:column;overflow:hidden}
+.hero-fd-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=2400&q=80') center/cover;filter:brightness(.5) saturate(1.05);animation:kbF 16s ease-in-out infinite alternate}
+@keyframes kbF{from{transform:scale(1.03)}to{transform:scale(1.1) translate(1%,-1%)}}
+.hero-overlay-f{position:absolute;inset:0;background:linear-gradient(135deg,rgba(8,18,10,.78),rgba(8,18,10,.3) 60%,rgba(8,18,10,.55))}
+.demo-badge{display:inline-flex;align-items:center;gap:.4rem;padding:.3rem .8rem;border-radius:999px;background:rgba(62,207,110,.12);border:1px solid rgba(62,207,110,.35);font-size:11px;font-weight:600;color:#3ecf6e;letter-spacing:.08em;text-transform:uppercase;margin-bottom:1rem}
+.cat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:1.5rem}
+@media(min-width:900px){.cat-grid{grid-template-columns:repeat(4,1fr)}}
+.cat-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:16px;overflow:hidden;transition:.25s;display:flex;flex-direction:column}
+.cat-card:hover{border-color:rgba(62,207,110,.4);transform:translateY(-3px);box-shadow:0 14px 44px rgba(62,207,110,.08)}
+.cat-img{height:150px;overflow:hidden}
+.cat-img img{width:100%;height:100%;object-fit:cover;filter:saturate(.95);transition:transform .45s}
+.cat-card:hover .cat-img img{transform:scale(1.05)}
+.cat-body{padding:1.25rem;display:flex;flex-direction:column;flex:1}
+.cat-card h3{font-size:15px;font-weight:600;letter-spacing:-.02em;color:#f0f0ee;margin-bottom:.35rem}
+.cat-card .cp{font-size:12.5px;color:rgba(240,240,238,.55);line-height:1.6;margin-bottom:.75rem}
+.cat-card ul{list-style:none;padding:0;flex:1}
+.cat-card ul li{font-size:12.5px;color:rgba(240,240,238,.5);padding:.28rem 0;border-bottom:1px solid rgba(255,255,255,.07);padding-left:1rem;position:relative;line-height:1.55}
+.cat-card ul li:last-child{border-bottom:none}
+.cat-card ul li::before{content:'›';position:absolute;left:0;color:#3ecf6e;font-weight:700}
+.btn-fd{margin-top:1rem;display:block;text-align:center;padding:.6rem;border-radius:9px;font-size:.8125rem;font-weight:600;background:linear-gradient(135deg,#3ecf6e,#249a4d);color:#fff;text-decoration:none;cursor:none;transition:.2s;font-family:var(--font-body)}
+.btn-fd:hover{opacity:.88;transform:translateY(-1px)}
+.flow-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:1.5rem}
+@media(min-width:900px){.flow-grid{grid-template-columns:repeat(4,1fr)}}
+.flow-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:1.4rem;transition:.25s}
+.flow-card:hover{border-color:rgba(62,207,110,.35)}
+.flow-num{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:rgba(62,207,110,.12);border:1px solid rgba(62,207,110,.4);color:#3ecf6e;font-size:13px;font-weight:700;margin-bottom:.8rem}
+.flow-card p{font-size:13px;color:rgba(240,240,238,.65);line-height:1.6}
+.cta-box-f{background:rgba(62,207,110,.06);border:1px dashed rgba(62,207,110,.35);border-radius:16px;padding:2.5rem;text-align:center;margin-top:4rem}
+.cta-box-f h3{font-size:clamp(22px,3vw,34px);font-weight:600;letter-spacing:-.03em;color:#f0f0ee;margin-bottom:.75rem}
+.cta-box-f p{font-size:14px;color:rgba(240,240,238,.55);margin-bottom:1.75rem;max-width:48ch;margin-inline:auto}
+@media(max-width:700px){.cat-grid,.flow-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div id="cursor"></div>
+
+<nav>
+  <div class="nav-pill lg" id="navPill">
+    <div class="nav-left-m">
+      <a class="nav-back" href="index.html">←<span class="back-label"> <span data-i="back">Буцах</span></span></a>
+      <div class="nav-div"></div>
+      <span class="nav-brand">TB Plan</span>
+    </div>
+    <div class="nav-links">
+      <a class="nav-link" href="#categories" data-i="fd.cats.h2">Нийлүүлэлтийн чиглэлүүд</a>
+      <a class="nav-link" href="#flow"       data-i="fd.flow.h2">Хэрхэн ажилладаг вэ?</a>
+      <a class="nav-link" href="index.html#contact" data-i="nav.contact">Холбоо барих</a>
+    </div>
+    <div class="nav-right-m">
+      <a class="nav-cta-inline" style="background:linear-gradient(135deg,#3ecf6e,#249a4d);color:#fff;border-radius:7px;font-weight:600;text-decoration:none" href="index.html?service=food#contact" data-i="hero.btn2.fd">Үнийн санал авах</a>
+      <button class="lang-btn" id="langBtn"><span id="langFlag">🇨🇳</span><span id="langLabel">中文</span></button>
+    </div>
+  </div>
+</nav>
+
+<section id="hero-fd">
+  <div class="hero-fd-bg"></div>
+  <div class="hero-overlay-f"></div>
+  <div class="hero-layout">
+    <div style="height:5rem"></div>
+    <div class="hero-body">
+      <div class="hero-grid">
+        <div>
+          <span class="demo-badge">● Demo</span>
+          <p style="font-size:10px;color:#3ecf6e;text-transform:uppercase;letter-spacing:.35em;font-weight:500;margin-bottom:.8rem" data-i="hero.eyebrow.fd"></p>
+          <h1 class="hero-h1" id="heroH1" data-hero-key="hero.h1.fd"></h1>
+          <p class="hero-sub" id="heroSub" data-i="hero.sub.fd"></p>
+          <div class="hero-btns" id="heroBtns">
+            <a class="btn-w" href="#categories" data-i="hero.btn1.fd">Чиглэлүүд үзэх</a>
+            <a class="btn-g lg" href="index.html?service=food#contact" data-i="hero.btn2.fd">Үнийн санал авах</a>
+          </div>
+        </div>
+        <div class="hero-tag-col">
+          <div class="hero-tag lg" id="heroTag" style="border-color:rgba(62,207,110,.28);background:rgba(62,207,110,.07)">
+            <p data-i="hero.tag.fd">Импорт. Бөөний. Тогтмол.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint"><span>Scroll</span><div class="scroll-line"></div></div>
+</section>
+
+<section class="section reveal" id="categories">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow-row"><div class="eyebrow-line"></div><span class="eyebrow-text">01 — SUPPLY</span></div>
+      <h2 class="section-h2" style="color:#f0f0ee" data-i="fd.cats.h2"></h2>
+      <p class="section-sub" style="color:rgba(240,240,238,.5)" data-i="fd.cats.p"></p>
+    </div>
+    <div class="cat-grid">
+      <div class="cat-card">
+        <div class="cat-img"><img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=800&q=80" alt="Ногоо" loading="lazy"/></div>
+        <div class="cat-body">
+          <h3 data-i="fd.c1.h3"></h3><p class="cp" data-i="fd.c1.p"></p>
+          <ul><li data-i="fd.c1.l1"></li><li data-i="fd.c1.l2"></li><li data-i="fd.c1.l3"></li></ul>
+          <a class="btn-fd" href="index.html?service=food#contact" data-i="btn.quote">Үнийн санал авах</a>
+        </div>
+      </div>
+      <div class="cat-card">
+        <div class="cat-img"><img src="https://images.unsplash.com/photo-1619566636858-adf3ef46400b?auto=format&fit=crop&w=800&q=80" alt="Жимс" loading="lazy"/></div>
+        <div class="cat-body">
+          <h3 data-i="fd.c2.h3"></h3><p class="cp" data-i="fd.c2.p"></p>
+          <ul><li data-i="fd.c2.l1"></li><li data-i="fd.c2.l2"></li><li data-i="fd.c2.l3"></li></ul>
+          <a class="btn-fd" href="index.html?service=food#contact" data-i="btn.quote">Үнийн санал авах</a>
+        </div>
+      </div>
+      <div class="cat-card">
+        <div class="cat-img"><img src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=800&q=80" alt="Хүнсний бүтээгдэхүүн" loading="lazy"/></div>
+        <div class="cat-body">
+          <h3 data-i="fd.c3.h3"></h3><p class="cp" data-i="fd.c3.p"></p>
+          <ul><li data-i="fd.c3.l1"></li><li data-i="fd.c3.l2"></li><li data-i="fd.c3.l3"></li></ul>
+          <a class="btn-fd" href="index.html?service=food#contact" data-i="btn.quote">Үнийн санал авах</a>
+        </div>
+      </div>
+      <div class="cat-card">
+        <div class="cat-img"><img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80" alt="Гэрээт нийлүүлэлт" loading="lazy"/></div>
+        <div class="cat-body">
+          <h3 data-i="fd.c4.h3"></h3><p class="cp" data-i="fd.c4.p"></p>
+          <ul><li data-i="fd.c4.l1"></li><li data-i="fd.c4.l2"></li><li data-i="fd.c4.l3"></li></ul>
+          <a class="btn-fd" href="index.html?service=food#contact" data-i="btn.quote">Үнийн санал авах</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt reveal" id="flow">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow-row"><div class="eyebrow-line"></div><span class="eyebrow-text">02 — PROCESS</span></div>
+      <h2 class="section-h2" style="color:#f0f0ee" data-i="fd.flow.h2"></h2>
+    </div>
+    <div class="flow-grid">
+      <div class="flow-card"><div class="flow-num">01</div><p data-i="fd.f1"></p></div>
+      <div class="flow-card"><div class="flow-num">02</div><p data-i="fd.f2"></p></div>
+      <div class="flow-card"><div class="flow-num">03</div><p data-i="fd.f3"></p></div>
+      <div class="flow-card"><div class="flow-num">04</div><p data-i="fd.f4"></p></div>
+    </div>
+    <div class="cta-box-f reveal">
+      <h3 data-i="fd.cta.h3"></h3>
+      <p data-i="fd.cta.p"></p>
+      <a class="btn-w" href="index.html?service=food#contact" data-i="fd.cta.btn">Холбоо барих →</a>
+    </div>
+    <p style="margin-top:1.5rem;font-size:11.5px;color:rgba(240,240,238,.35);text-align:center" data-i="demo.note"></p>
+  </div>
+</section>
+
+<footer>
+  <div class="marquee-wrap"><div class="marquee-track">
+    <span class="marquee-text">TB PLAN • ХҮНС • ИМПОРТ • НИЙЛҮҮЛЭЛТ • </span>
+    <span class="marquee-text">TB PLAN • ХҮНС • ИМПОРТ • НИЙЛҮҮЛЭЛТ • </span>
+    <span class="marquee-text">TB PLAN • ХҮНС • ИМПОРТ • НИЙЛҮҮЛЭЛТ • </span>
+  </div></div>
+  <div class="container footer-inner">
+    <div class="footer-brand">TB Plan</div>
+    <p class="footer-copy">© <span id="year"></span> TB Plan • <span data-i="footer.fd"></span></p>
+    <a class="footer-up" href="index.html" data-i="footer.home"></a>
+  </div>
+</footer>
+
+<script src="index.js"></script>
+</body>
+</html>

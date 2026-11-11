@@ -120,10 +120,10 @@ const T = {
     "hero.eyebrow":    "INTERIOR DESIGN · FURNITURE · EXECUTION",
     "hero.h1.design":  "Орчин үеийн интерьер —\nзөв төлөвлөлтөөс бодит гүйцэтгэл хүртэл.",
     "hero.sub.design": "Концепт → layout → материал → гэрэлтүүлэг → 3D зураглал → гүйцэтгэл — нэг шугамаар шийдэж өгнө.",
-    "hero.btn1":       "Интерьер дизайн",
-    "hero.btn2":       "Тавилгын дизайн",
-    "hero.btn3":       "Гүйцэтгэл",
-    "hero.btn4":       "Хүүхдийн өрөө",
+    "hero.btn1.design": "Интерьер дизайн",
+    "hero.btn2.design": "Тавилгын дизайн",
+    "hero.btn3.design": "Гүйцэтгэл",
+    "hero.btn4.design": "Хүүхдийн өрөө",
     "hero.tag.design": "Интерьер. Тавилга. Гүйцэтгэл.",
     "brandSub":        "Plan • Интерьер",
     "nav.interior":    "Интерьер",
@@ -345,6 +345,90 @@ const T = {
     "hero.btn1.web":    "Захиалах",
     "hero.btn2.web":    "Үйлчилгээ үзэх",
 
+    // Nav extra
+    "nav.pricing": "Үнэ",
+    "form.error":  "Нэр, холбоо барих мэдээлэл, мессежээ бүрэн бөглөнө үү.",
+
+    // Materials page
+    "hero.eyebrow.mat": "TB PLAN • БАРИЛГЫН МАТЕРИАЛ",
+    "hero.h1.mat":      "Барилгын материал —\nнайдвартай нийлүүлэлт.",
+    "hero.sub.mat":     "Бетон зуурмаг, цагаан замаск, хайрга, дайрга — үйлдвэрээс шууд, хүргэлттэй.",
+    "hero.btn1.mat":    "Бүтээгдэхүүн үзэх",
+    "hero.btn2.mat":    "Үнийн санал авах",
+    "hero.tag.mat":     "Бетон. Замаск. Хайрга. Дайрга.",
+    "mat.products.h2":  "Бүтээгдэхүүнүүд",
+    "mat.products.p":   "Жишээ (демо) мэдээлэл — үнэ, үзүүлэлтийг лавлагаагаар баталгаажуулна.",
+    "mat.p1.h3": "Бетон зуурмаг",
+    "mat.p1.p":  "М100–М400 маркийн бетон, үйлдвэрээс шууд.",
+    "mat.p1.l1": "Марк: М100 / М200 / М300 / М400",
+    "mat.p1.l2": "Миксерээр хүргэнэ",
+    "mat.p1.l3": "Хэмжээ: 1м³-ээс",
+    "mat.p2.h3": "Цагаан замаск",
+    "mat.p2.p":  "Дотор заслын өндөр чанарын замаск.",
+    "mat.p2.l1": "25кг савлагаа",
+    "mat.p2.l2": "Гөлгөр гадаргуу",
+    "mat.p2.l3": "Бөөний үнэ боломжтой",
+    "mat.p3.h3": "Хайрга",
+    "mat.p3.p":  "Угаасан хайрга, фракц сонголттой.",
+    "mat.p3.l1": "Фракц: 5–20мм",
+    "mat.p3.l2": "Тн болон м³-ээр",
+    "mat.p3.l3": "Хүргэлттэй",
+    "mat.p4.h3": "Дайрга",
+    "mat.p4.p":  "Буталсан дайрга — зам, суурийн ажилд.",
+    "mat.p4.l1": "Фракц: 0–5 / 5–10 / 10–20мм",
+    "mat.p4.l2": "Том хэмжээний захиалга",
+    "mat.p4.l3": "Гэрээт нийлүүлэлт",
+    "mat.order":   "Захиалах →",
+    "mat.flow.h2": "Захиалгын урсгал",
+    "mat.f1": "Захиалга + хэмжээ",
+    "mat.f2": "Үнийн санал + гэрээ",
+    "mat.f3": "Үйлдвэрлэл / бэлтгэл",
+    "mat.f4": "Хүргэлт + баталгаа",
+    "mat.cta.h3":  "Үнийн санал хэрэгтэй юу?",
+    "mat.cta.p":   "Хэмжээ, байршил, хугацаагаа бичээд илгээгээрэй — бид эргэн холбогдоно.",
+    "mat.cta.btn": "Холбоо барих →",
+    "demo.note":   "Демо хуудас — мэдээлэл жишээ болно.",
+    "footer.mat":  "Барилгын материал • Нийлүүлэлт • Хүргэлт",
+
+    // Food page
+    "hero.eyebrow.fd": "TB PLAN • ХҮНС",
+    "hero.h1.fd":      "Хүнс — импорт,\nбөөний нийлүүлэлт.",
+    "hero.sub.fd":     "Ногоо, жимс, хүнсний бүтээгдэхүүний импорт болон байгууллагын тогтмол нийлүүлэлт.",
+    "hero.btn1.fd":    "Чиглэлүүд үзэх",
+    "hero.btn2.fd":    "Үнийн санал авах",
+    "hero.tag.fd":     "Импорт. Бөөний. Тогтмол.",
+    "fd.cats.h2": "Нийлүүлэлтийн чиглэлүүд",
+    "fd.cats.p":  "Жишээ (демо) мэдээлэл — нэр төрөл захиалгаас хамаарна.",
+    "fd.c1.h3": "Ногоо",
+    "fd.c1.p":  "Төмс, лууван, сонгино, байцаа — улирлын нийлүүлэлт.",
+    "fd.c1.l1": "Бөөний үнэ",
+    "fd.c1.l2": "Тогтмол хуваарь",
+    "fd.c1.l3": "Чанарын шалгалт",
+    "fd.c2.h3": "Жимс, жимсгэнэ",
+    "fd.c2.p":  "Импортын болон улирлын жимс, багц захиалга.",
+    "fd.c2.l1": "Импортын шууд суваг",
+    "fd.c2.l2": "Хүйтэн хэлхээ",
+    "fd.c2.l3": "Багц савлагаа",
+    "fd.c3.h3": "Хүнсний бүтээгдэхүүн",
+    "fd.c3.p":  "Өргөн хэрэглээний хүнс, багц нийлүүлэлт.",
+    "fd.c3.l1": "Бөөний багц",
+    "fd.c3.l2": "Баталгаат хугацаа",
+    "fd.c3.l3": "Агуулахын нөөц",
+    "fd.c4.h3": "Гэрээт нийлүүлэлт",
+    "fd.c4.p":  "Байгууллага, ресторан, сургуулийн тогтмол хангамж.",
+    "fd.c4.l1": "Сарын гэрээ",
+    "fd.c4.l2": "Тогтмол үнэ",
+    "fd.c4.l3": "Хуваарьт хүргэлт",
+    "fd.flow.h2": "Хэрхэн ажилладаг вэ?",
+    "fd.f1": "Хэрэгцээ + нэр төрөл",
+    "fd.f2": "Үнийн санал + гэрээ",
+    "fd.f3": "Ложистик + агуулах",
+    "fd.f4": "Тогтмол хүргэлт",
+    "fd.cta.h3":  "Нийлүүлэлтийн санал авах уу?",
+    "fd.cta.p":   "Нэр төрөл, хэмжээ, давтамжаа бичээд илгээгээрэй — бид үнийн санал хүргүүлнэ.",
+    "fd.cta.btn": "Холбоо барих →",
+    "footer.fd":  "Хүнс • Импорт • Нийлүүлэлт",
+
     // Shared form options (no visa)
     serviceOptions: [
       "Вэб хөгжүүлэлт",
@@ -484,10 +568,10 @@ const T = {
     "hero.eyebrow":    "室内设计 · 家具 · 施工",
     "hero.h1.design":  "现代室内设计 —\n从规划到完美施工。",
     "hero.sub.design": "概念 → 布局 → 材料 → 灯光 → 3D渲染 → 施工 — 一站式服务。",
-    "hero.btn1":       "室内设计",
-    "hero.btn2":       "家具设计",
-    "hero.btn3":       "施工",
-    "hero.btn4":       "儿童房",
+    "hero.btn1.design": "室内设计",
+    "hero.btn2.design": "家具设计",
+    "hero.btn3.design": "施工",
+    "hero.btn4.design": "儿童房",
     "hero.tag.design": "室内设计. 家具. 施工.",
     "brandSub":        "Plan • 室内设计",
     "nav.interior":    "室内设计",
@@ -706,6 +790,87 @@ const T = {
     "hero.btn1.web":    "立即预约",
     "hero.btn2.web":    "查看服务",
 
+    "nav.pricing": "价格",
+    "form.error":  "请填写姓名、联系方式和留言。",
+
+    "hero.eyebrow.mat": "TB PLAN • 建筑材料",
+    "hero.h1.mat":      "建筑材料 —\n可靠的供应。",
+    "hero.sub.mat":     "混凝土、白水泥腻子、砾石、碎石——工厂直供，含配送。",
+    "hero.btn1.mat":    "查看产品",
+    "hero.btn2.mat":    "获取报价",
+    "hero.tag.mat":     "混凝土. 腻子. 砾石. 碎石.",
+    "mat.products.h2":  "产品列表",
+    "mat.products.p":   "示例（演示）信息——价格与参数以咨询确认为准。",
+    "mat.p1.h3": "混凝土搅拌料",
+    "mat.p1.p":  "М100–М400标号混凝土，工厂直供。",
+    "mat.p1.l1": "标号：М100 / М200 / М300 / М400",
+    "mat.p1.l2": "搅拌车配送",
+    "mat.p1.l3": "起订量：1立方米",
+    "mat.p2.h3": "白水泥腻子",
+    "mat.p2.p":  "室内装修高品质腻子。",
+    "mat.p2.l1": "25公斤包装",
+    "mat.p2.l2": "表面光滑",
+    "mat.p2.l3": "支持批发价",
+    "mat.p3.h3": "砾石",
+    "mat.p3.p":  "水洗砾石，多种粒径可选。",
+    "mat.p3.l1": "粒径：5–20毫米",
+    "mat.p3.l2": "按吨或立方米",
+    "mat.p3.l3": "含配送",
+    "mat.p4.h3": "碎石",
+    "mat.p4.p":  "破碎碎石——道路、地基工程用。",
+    "mat.p4.l1": "粒径：0–5 / 5–10 / 10–20毫米",
+    "mat.p4.l2": "支持大宗订单",
+    "mat.p4.l3": "合同供货",
+    "mat.order":   "立即订购 →",
+    "mat.flow.h2": "订购流程",
+    "mat.f1": "下单 + 数量",
+    "mat.f2": "报价 + 合同",
+    "mat.f3": "生产 / 备货",
+    "mat.f4": "配送 + 质保",
+    "mat.cta.h3":  "需要报价吗？",
+    "mat.cta.p":   "请告知数量、地点和工期——我们会尽快回复。",
+    "mat.cta.btn": "联系我们 →",
+    "demo.note":   "演示页面——内容仅为示例。",
+    "footer.mat":  "建筑材料 • 供应 • 配送",
+
+    "hero.eyebrow.fd": "TB PLAN • 食品",
+    "hero.h1.fd":      "食品 — 进口，\n批发供应。",
+    "hero.sub.fd":     "蔬菜、水果、食品的进口及面向企业的定期供应。",
+    "hero.btn1.fd":    "查看类别",
+    "hero.btn2.fd":    "获取报价",
+    "hero.tag.fd":     "进口. 批发. 定期.",
+    "fd.cats.h2": "供应类别",
+    "fd.cats.p":  "示例（演示）信息——品类以订单为准。",
+    "fd.c1.h3": "蔬菜",
+    "fd.c1.p":  "土豆、胡萝卜、洋葱、卷心菜——季节性供应。",
+    "fd.c1.l1": "批发价格",
+    "fd.c1.l2": "定期供货",
+    "fd.c1.l3": "质量检验",
+    "fd.c2.h3": "水果",
+    "fd.c2.p":  "进口及应季水果，支持批量订购。",
+    "fd.c2.l1": "进口直供渠道",
+    "fd.c2.l2": "冷链运输",
+    "fd.c2.l3": "整箱包装",
+    "fd.c3.h3": "食品类",
+    "fd.c3.p":  "日常消费食品，成套供应。",
+    "fd.c3.l1": "批发套餐",
+    "fd.c3.l2": "保质期保障",
+    "fd.c3.l3": "仓储备货",
+    "fd.c4.h3": "合同供应",
+    "fd.c4.p":  "企业、餐厅、学校的定期供应。",
+    "fd.c4.l1": "月度合同",
+    "fd.c4.l2": "固定价格",
+    "fd.c4.l3": "按时配送",
+    "fd.flow.h2": "如何合作？",
+    "fd.f1": "需求 + 品类",
+    "fd.f2": "报价 + 合同",
+    "fd.f3": "物流 + 仓储",
+    "fd.f4": "定期配送",
+    "fd.cta.h3":  "需要供应方案吗？",
+    "fd.cta.p":   "请告知品类、数量和频率——我们会发送报价。",
+    "fd.cta.btn": "联系我们 →",
+    "footer.fd":  "食品 • 进口 • 供应",
+
     serviceOptions: [
       "网站开发",
       "室内设计",
@@ -827,6 +992,13 @@ if (cursorEl) {
 (function initLoader() {
   const loader  = document.getElementById("loader");
   if (!loader) return;
+  // UX: show the full loader only once per session — instant on repeat visits
+  if (sessionStorage.getItem("tbLoaded")) {
+    loader.classList.add("done");
+    setTimeout(() => loader.remove(), 250);
+    return;
+  }
+  sessionStorage.setItem("tbLoaded", "1");
   const words   = ["Design", "Build", "Create", "Inspire"];
   const wordEl  = document.getElementById("loaderWord");
   const counter = document.getElementById("loaderCounter");
@@ -963,8 +1135,19 @@ contactForm?.addEventListener("submit", (e) => {
   e.preventDefault();
   const data = Object.fromEntries(new FormData(contactForm).entries());
   const d = T[lang];
+  // Validation: don't accept empty submissions
+  if (!data.name?.trim() || !data.contact?.trim() || !data.message?.trim()) {
+    if (formHint) {
+      formHint.textContent = d["form.error"];
+      formHint.style.color = "#e05a4e";
+      formHint.classList.add("show", "is-visible");
+      setTimeout(() => formHint.classList.remove("show", "is-visible"), 4500);
+    }
+    return;
+  }
   if (formHint) {
-    formHint.textContent = d.formSuccess(data.name, data.service);
+    formHint.style.color = "";
+    formHint.textContent = d.formSuccess(data.name.trim(), data.service);
     formHint.classList.add("show", "is-visible");
   }
   contactForm.reset();
@@ -972,6 +1155,17 @@ contactForm?.addEventListener("submit", (e) => {
     formHint?.classList.remove("show", "is-visible");
   }, 6500);
 });
+
+// Preselect service from ?service= (order buttons on subpages)
+// NB: called after applyLang() so the rebuilt <select> keeps the selection
+function prefillService() {
+  const code = new URLSearchParams(location.search).get("service");
+  if (!code) return;
+  const idx = { web: 0, interior: 1, media: 2, materials: 3, food: 4 }[code];
+  if (idx === undefined) return;
+  const sel = document.getElementById("serviceSelect");
+  if (sel && sel.options[idx]) sel.selectedIndex = idx;
+}
 
 // ============================================================
 // Detail Slider (legacy — uses .sliderDot / .sliderBtn)
@@ -1272,9 +1466,53 @@ if (reveals.length) {
 }
 
 // ============================================================
+// Mobile menu (auto-injected hamburger — nav links were hidden <768px)
+// ============================================================
+(function initMobileMenu() {
+  const pill  = document.getElementById("navPill");
+  const links = pill?.querySelector(".nav-links");
+  const right = pill?.querySelector(".nav-right-m");
+  if (!pill || !links || !right) return;
+
+  const btn = document.createElement("button");
+  btn.className = "menu-btn";
+  btn.id = "menuBtn";
+  btn.setAttribute("aria-label", "Цэс");
+  btn.setAttribute("aria-expanded", "false");
+  btn.innerHTML = "<span></span><span></span><span></span>";
+  right.appendChild(btn);
+
+  const panel = document.createElement("div");
+  panel.className = "mobile-menu";
+  panel.id = "mobileMenu";
+  links.querySelectorAll("a").forEach((a) => {
+    const c = a.cloneNode(true);
+    c.classList.remove("nav-link");
+    c.removeAttribute("style");
+    c.className = "mobile-menu-link";
+    panel.appendChild(c);
+  });
+  document.querySelector("nav")?.appendChild(panel);
+
+  function closeMenu() {
+    panel.classList.remove("open");
+    btn.classList.remove("open");
+    btn.setAttribute("aria-expanded", "false");
+  }
+  btn.addEventListener("click", () => {
+    const open = panel.classList.toggle("open");
+    btn.classList.toggle("open", open);
+    btn.setAttribute("aria-expanded", String(open));
+  });
+  panel.querySelectorAll("a").forEach((a) => a.addEventListener("click", closeMenu));
+  window.addEventListener("keydown", (e) => { if (e.key === "Escape") closeMenu(); });
+})();
+
+// ============================================================
 // Init
 // ============================================================
 applyLang();
+prefillService();
 
 // Hero fade-ins
 fadeIn("heroSub",   800);
