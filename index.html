@@ -138,6 +138,17 @@ body{font-family:'Inter Tight',system-ui,sans-serif;-webkit-font-smoothing:antia
 .st-slot{display:inline-block;width:1em;height:1em;margin:.1em .2em -.15em .2em;vertical-align:baseline}
 .st-spacer{height:calc(60*var(--u))}
 
+/* ---------- Studio reel carousel ---------- */
+.studio{padding:calc(40*var(--u)) 0 calc(80*var(--u));overflow:hidden}
+.studio-head{padding:0 calc(90*var(--u));text-align:center}
+.studio-head h2{margin-top:calc(18*var(--u));font-weight:500;font-size:calc(70*var(--u));line-height:.98;letter-spacing:-.03em}
+.reel-band{--cu:calc(100vw / 1440);position:relative;width:100%;height:calc(480*var(--cu));margin-top:calc(30*var(--u));cursor:grab;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.reel-band.grabbing{cursor:grabbing}
+.reel-card{position:absolute;left:0;top:0;background:#dfe5ee;will-change:transform,clip-path}
+.reel-card img,.reel-card video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.reel-play{position:absolute;left:calc(14*var(--cu));top:calc(var(--py,0px) - 34*var(--cu));width:calc(34*var(--cu));height:calc(34*var(--cu));border-radius:50%;background:rgba(255,255,255,.28);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.45);display:grid;place-items:center}
+.reel-play svg{width:42%;height:42%;fill:#fff;margin-left:8%}
+
 /* ---------- Packages ---------- */
 .sec{padding:calc(120*var(--u)) calc(90*var(--u))}
 .eyebrow{display:inline-flex;align-items:center;gap:calc(10*var(--u));font-size:calc(14*var(--u));letter-spacing:.14em;text-transform:uppercase;color:rgba(15,20,30,.5);font-weight:500}
@@ -318,6 +329,10 @@ footer{padding:calc(110*var(--u)) calc(90*var(--u)) calc(40*var(--u))}
   .work-meta h3{font-size:19px}
   .work-meta p{font-size:13px;margin-top:3px}
   .work-tag{font-size:11.5px;padding:5px 10px}
+  .studio{padding:24px 0 8px}
+  .studio-head{padding:0 20px}
+  .studio-head h2{font-size:36px;margin-top:12px}
+  .reel-band{--cu:calc(100vw / 640);height:max(250px,calc(480*var(--cu)));margin-top:20px}
   .steps{grid-template-columns:1fr 1fr;gap:28px 16px}
   .step h4{font-size:18px;margin-top:20px}
   .step p{font-size:13.5px}
@@ -484,6 +499,15 @@ footer{padding:calc(110*var(--u)) calc(90*var(--u)) calc(40*var(--u))}
       <div class="work-meta"><div><h3>Zaya's Ananda</h3><p>Судалгааны төв · онлайн сургалт, дэлгүүр</p></div><span class="work-tag">Вэб сайт</span></div>
     </div>
   </div>
+</section>
+
+<!-- 4b. STUDIO REEL CAROUSEL -->
+<section class="studio" id="studio" aria-labelledby="studioTitle">
+  <div class="studio-head" data-reveal>
+    <span class="eyebrow">Студи</span>
+    <h2 id="studioTitle">Бидний бүтээсэн<br>reel, зураг, видео.</h2>
+  </div>
+  <div class="reel-band" id="reelBand" aria-label="Студийн бүтээлүүд — чирж гүйлгэнэ"></div>
 </section>
 
 <!-- 5. PACKAGES -->
@@ -848,6 +872,133 @@ var io = new IntersectionObserver(function(e){
   gsap.from(blocks[0].querySelector('.tile'), {y:-300, rotation:15, duration:2, ease:'power1.out'});
 }, {rootMargin:'0px 0px -300px 0px'});
 io.observe(tl);
+
+
+/* ---------- studio curved reel carousel ---------- */
+(function(){
+  var band = document.getElementById('reelBand');
+  if (!band) return;
+  var ITEMS = [
+    {type:'video', src:'videos/reel-zaya.mp4',     poster:'images/studio/reel-zaya.jpg',     alt:"Zaya's Ananda — reel"},
+    {type:'img',   src:'images/studio/malgai.jpg',  alt:'Брэндийн фото — малгай'},
+    {type:'img',   src:'images/studio/hosdeel.jpg', alt:'Бүтээгдэхүүний фото — хос дээл'},
+    {type:'video', src:'videos/reel-nitecore.mp4',  poster:'images/studio/reel-nitecore.jpg', alt:'Nitecore — бүтээгдэхүүний reel'},
+    {type:'img',   src:'images/studio/deel.jpg',    alt:'Бүтээгдэхүүний фото — дээл'},
+    {type:'img',   src:'images/studio/back.jpg',    alt:'Брэндийн фото — пальто'},
+    {type:'img',   src:'images/studio/godon.jpg',   alt:'Бүтээгдэхүүний фото — гутал'}
+  ];
+  var N = ITEMS.length * 2, PITCH = 196;
+  var cards = [];
+  for (var i = 0; i < N; i++){
+    var it = ITEMS[i % ITEMS.length], el = document.createElement('div');
+    el.className = 'reel-card';
+    var media;
+    if (it.type === 'video'){
+      media = document.createElement('video');
+      media.muted = true; media.loop = true; media.playsInline = true; media.preload = 'none';
+      media.setAttribute('muted', ''); media.setAttribute('playsinline', '');
+      media.poster = it.poster; media.dataset.src = it.src;
+      media.setAttribute('aria-label', it.alt);
+      el.appendChild(media);
+      var play = document.createElement('span'); play.className = 'reel-play'; play.setAttribute('aria-hidden', 'true');
+      play.innerHTML = '<svg viewBox="0 0 12 12"><path d="M3.5 2.2v7.6c0 .5.5.8.9.5l6-3.8a.6.6 0 0 0 0-1L4.4 1.7c-.4-.3-.9 0-.9.5Z"/></svg>';
+      el.appendChild(play);
+    } else {
+      media = document.createElement('img');
+      media.src = it.src; media.alt = it.alt; media.loading = 'lazy'; media.decoding = 'async'; media.draggable = false;
+      el.appendChild(media);
+    }
+    band.appendChild(el);
+    cards.push({el:el, media:media, video:it.type === 'video'});
+  }
+
+  var W = 1440, C = 720, HALF = 706, scale = 1, BAND_H = 440;
+  function measure(){
+    if (innerWidth <= 820){ W = 640; } else { W = 1440; }
+    C = W / 2; HALF = C - 14;
+    scale = band.clientWidth / W;
+  }
+  measure(); addEventListener('resize', measure);
+
+  function rounded(pts, r){
+    var d = '', n = pts.length;
+    for (var k = 0; k < n; k++){
+      var p0 = pts[(k + n - 1) % n], p1 = pts[k], p2 = pts[(k + 1) % n];
+      var a = Math.hypot(p0[0] - p1[0], p0[1] - p1[1]), b = Math.hypot(p2[0] - p1[0], p2[1] - p1[1]);
+      var ra = Math.min(r, a / 2) / a, rb = Math.min(r, b / 2) / b;
+      var s = [p1[0] + (p0[0] - p1[0]) * ra, p1[1] + (p0[1] - p1[1]) * ra];
+      var e = [p1[0] + (p2[0] - p1[0]) * rb, p1[1] + (p2[1] - p1[1]) * rb];
+      d += (k ? 'L' : 'M') + s[0].toFixed(1) + ' ' + s[1].toFixed(1) + 'Q' + p1[0].toFixed(1) + ' ' + p1[1].toFixed(1) + ' ' + e[0].toFixed(1) + ' ' + e[1].toFixed(1);
+    }
+    return d + 'Z';
+  }
+
+  var offset = 0, vel = 0, dragging = false, lastX = 0, lastT = 0, visible = false;
+  var L = N * PITCH;
+  function layout(){
+    var u = scale, mid = (BAND_H / 2 + 20);
+    for (var i = 0; i < cards.length; i++){
+      var c = cards[i];
+      var t = ((i * PITCH - offset) % L + L) % L; if (t > L / 2) t -= L;
+      var x = C + t * (1 + 0.083 * Math.pow(t / HALF, 2));
+      var d = Math.min(Math.abs(x - C) / HALF, 1.25);
+      var w = 170 + 48 * d * d;
+      if (x + w < -40 || x - w > W + 40){ c.el.style.visibility = 'hidden'; continue; }
+      c.el.style.visibility = '';
+      var xl = x - w / 2, xr = x + w / 2;
+      var ql = Math.min(Math.abs(xl - C) / HALF, 1.25), qr = Math.min(Math.abs(xr - C) / HALF, 1.25);
+      var hl = 280 + 92 * Math.pow(ql, 2.6), hr = 280 + 92 * Math.pow(qr, 2.6);
+      var hm = Math.max(hl, hr), cy = mid - 12 * d * d;
+      var pw = w * u, ph = hm * u;
+      c.el.style.width = pw + 'px'; c.el.style.height = ph + 'px';
+      c.el.style.transform = 'translate3d(' + (xl * u) + 'px,' + ((cy - hm / 2) * u) + 'px,0)';
+      var tl = (hm - hl) / 2 * u, bl = (hm + hl) / 2 * u, tr = (hm - hr) / 2 * u, br = (hm + hr) / 2 * u;
+      c.el.style.clipPath = 'path("' + rounded([[0, tl], [pw, tr], [pw, br], [0, bl]], 15 * u) + '")';
+      c.el.style.setProperty('--py', ((bl - 14 * u) ) + 'px');
+    }
+  }
+
+  var last = performance.now();
+  function frame(now){
+    var dt = Math.min((now - last) / 1000, 0.1); last = now;
+    if (visible){
+      if (!dragging){
+        if (Math.abs(vel) > 1){ offset += vel * dt; vel *= Math.pow(0.05, dt); }
+        else vel = 0;
+        if (!RM) offset += 50 * dt;
+      }
+      layout();
+    }
+    requestAnimationFrame(frame);
+  }
+  layout();
+  requestAnimationFrame(frame);
+
+  band.addEventListener('pointerdown', function(e){
+    dragging = true; vel = 0; lastX = e.clientX; lastT = performance.now();
+    band.setPointerCapture(e.pointerId); band.classList.add('grabbing');
+  });
+  band.addEventListener('pointermove', function(e){
+    if (!dragging) return;
+    var now = performance.now(), dx = (e.clientX - lastX) / scale, dtm = Math.max((now - lastT) / 1000, 1 / 240);
+    offset -= dx; vel = -dx / dtm * 0.6 + vel * 0.4;
+    lastX = e.clientX; lastT = now;
+    if (RM) layout();
+  });
+  function up(){ if (!dragging) return; dragging = false; band.classList.remove('grabbing'); if (performance.now() - lastT > 80) vel = 0; }
+  band.addEventListener('pointerup', up); band.addEventListener('pointercancel', up);
+
+  new IntersectionObserver(function(e){
+    visible = e[0].isIntersecting;
+    cards.forEach(function(c){
+      if (!c.video) return;
+      if (visible && !RM){
+        if (!c.media.src){ c.media.src = c.media.dataset.src; }
+        c.media.play().catch(function(){});
+      } else if (c.media.src) c.media.pause();
+    });
+  }, {rootMargin:'150px'}).observe(band);
+})();
 
 /* ---------- reveals ---------- */
 if (!RM){
