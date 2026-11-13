@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TB Plan — Вэб · Сошиал · Контент</title>
-<meta name="description" content="TB Plan — вэб сайт, сошиал хуудас хөтлөлт, reel, постер, chatbot. Бизнесээ онлайнд өсгөх гурван багц.">
+<meta name="description" content="TB Plan — вэб сайт, сошиал хуудас хөтлөлт, reel, постер, chatbot. Бизнесээ онлайнд өсгөх гурван үйлчилгээ.">
 <script>
 /* Self-hosted Fontsource woff2 — latin + cyrillic + cyrillic-ext (Ө, Ү) + latin-ext (₮) */
 (function(){
@@ -394,7 +394,6 @@ footer{padding:calc(110*var(--u)) calc(90*var(--u)) calc(40*var(--u))}
     <nav class="nav" aria-label="Үндсэн цэс">
       <a href="#uilchilgee">Үйлчилгээ</a>
       <a href="#ajluud">Ажлууд</a>
-      <a href="#bagts">Багцууд</a>
       <a href="#yavts">Ажлын явц</a>
       <a href="#contact">Холбоо барих</a>
     </nav>
@@ -403,14 +402,13 @@ footer{padding:calc(110*var(--u)) calc(90*var(--u)) calc(40*var(--u))}
     </button>
   </div>
   <div class="pill pill-r">
-    <a href="#bagts">Багцууд</a>
+    <a href="#uilchilgee">Үйлчилгээ</a>
     <a class="chip" href="#contact">Үнийн санал авах</a>
   </div>
 </header>
 <div class="menu" id="menu">
   <a href="#uilchilgee">Үйлчилгээ</a>
   <a href="#ajluud">Ажлууд</a>
-  <a href="#bagts">Багцууд</a>
   <a href="#yavts">Ажлын явц</a>
   <a href="#contact">Холбоо барих</a>
 </div>
@@ -422,8 +420,8 @@ footer{padding:calc(110*var(--u)) calc(90*var(--u)) calc(40*var(--u))}
   <div class="hero-c">
     <h1 class="h1"><span class="mask"><span>Вэб. Сошиал.<br>Контент.</span></span></h1>
     <div class="hero-r">
-      <p class="sub">Бизнесээ онлайнд өсгөх<br>гурван багц — нэг баг.</p>
-      <a class="btn" href="#bagts">Багц сонгох</a>
+      <p class="sub">Бизнесээ онлайнд өсгөх<br>гурван үйлчилгээ — нэг баг.</p>
+      <a class="btn" href="#uilchilgee">Үйлчилгээ сонгох</a>
     </div>
   </div>
 </section>
@@ -448,7 +446,7 @@ footer{padding:calc(110*var(--u)) calc(90*var(--u)) calc(40*var(--u))}
 </section>
 
 <!-- 3. TIMELINE → STATEMENT -->
-<section class="tls" id="uilchilgee">
+<section class="tls" id="tanilcuulga">
   <div class="tl-wrap">
     <div class="tl" id="tl">
       <div class="tl-panel"></div>
@@ -528,11 +526,12 @@ footer{padding:calc(110*var(--u)) calc(90*var(--u)) calc(40*var(--u))}
 </section>
 
 <!-- 5. PACKAGES -->
-<section class="sec" id="bagts">
+<section class="sec" id="uilchilgee">
+  <span id="bagts" aria-hidden="true"></span>
   <div class="sec-head" data-reveal>
     <div>
-      <span class="eyebrow">Багцууд</span>
-      <h2>Гурван багц.<br>Нэг баг.</h2>
+      <span class="eyebrow">Үйлчилгээ</span>
+      <h2>Гурван үйлчилгээ.<br>Нэг баг.</h2>
     </div>
     <p class="sec-intro">Small, medium, enterprise гэж ангилахын оронд бид бизнесийн тань бодит хэрэгцээнд төвлөрсөн гурван үйлчилгээ санал болгодог.</p>
   </div>
@@ -558,7 +557,7 @@ footer{padding:calc(110*var(--u)) calc(90*var(--u)) calc(40*var(--u))}
       <p class="more-opt">CRM-тэй сайт 5,500,000₮ · ERP холболттой 12,000,000₮-өөс</p>
       <div class="price" data-show="once"><b>2,500,000₮</b><small>+ сарын арчилгаа 150,000₮</small></div>
       <div class="price" data-show="monthly" hidden><b>350,000₮<em>/сар</em></b><small>эхлэх 800,000₮ · 12 сарын гэрээ</small></div>
-      <a class="pick" href="#contact" data-pkg="web">Энэ багцыг сонгох →</a>
+      <a class="pick" href="#contact" data-pkg="web">Энэ үйлчилгээг сонгох →</a>
     </article>
 
     <article class="card dark" data-reveal data-card>
@@ -566,7 +565,7 @@ footer{padding:calc(110*var(--u)) calc(90*var(--u)) calc(40*var(--u))}
       <span class="tag">Санал болгох</span>
       <h3>Вэб + Сошиал</h3>
       <p class="lead">Вэб сайт, сошиал хуудас, чатбот — бүгд нэг дор, тусад нь авахаас хямд.</p>
-      <div class="seg" role="tablist" aria-label="Багцын түвшин">
+      <div class="seg" role="tablist" aria-label="Түвшин">
         <button data-v="s" role="tab" aria-selected="false">Эхлэл</button>
         <button class="on" data-v="m" role="tab" aria-selected="true">Өсөлт ★</button>
         <button data-v="l" role="tab" aria-selected="false">Бүрэн</button>
@@ -600,13 +599,13 @@ footer{padding:calc(110*var(--u)) calc(90*var(--u)) calc(40*var(--u))}
       <div class="price" data-show="s" hidden><b>2,100,000₮<em>/сар</em></b><small>эхлэх 1,500,000₮ · 12 сарын гэрээ</small></div>
       <div class="price" data-show="m"><b>4,200,000₮<em>/сар</em></b><small>эхлэх 3,000,000₮ · 12 сарын гэрээ</small></div>
       <div class="price" data-show="l" hidden><b>5,700,000₮<em>/сар-аас</em></b><small>эхлэх 13,000,000₮-өөс · 12 сарын гэрээ</small></div>
-      <a class="pick" href="#contact" data-pkg="web-social">Энэ багцыг сонгох →</a>
+      <a class="pick" href="#contact" data-pkg="web-social">Энэ үйлчилгээг сонгох →</a>
     </article>
 
     <article class="card" data-reveal>
       <div class="card-top"><span class="card-num">03</span><div class="ctile"><div class="tile tp5"></div></div></div>
       <span class="tag">Контент</span>
-      <h3>Контент багц</h3>
+      <h3>Контент</h3>
       <p class="lead">Reel болон постероо хэрэгтэй тоогоороо, нэгжийн үнээр захиалаарай.</p>
       <ul class="rows">
         <li><span>Дизайнтай пост / постер</span><b>150,000₮</b></li>
@@ -617,11 +616,11 @@ footer{padding:calc(110*var(--u)) calc(90*var(--u)) calc(40*var(--u))}
       </ul>
       <p class="more-opt">Тогтмол авбал сошиал хөтлөлт 1,800,000₮/сараас (6 пост + 2 reel)</p>
       <div class="price"><b>150,000₮</b><small>-өөс эхлэн, нэгжээр</small></div>
-      <a class="pick" href="#contact" data-pkg="content">Энэ багцыг сонгох →</a>
+      <a class="pick" href="#contact" data-pkg="content">Энэ үйлчилгээг сонгох →</a>
     </article>
   </div>
   <p class="pk-fine" data-reveal>Бүх үнэ НӨАТ-гүй. Зарын зардлыг харилцагч Meta-д шууд төлнө. Эхлэх төлбөрийн 50%-ийг ажил эхлэхэд, 50%-ийг хүлээлгэн өгөхөд төлнө. Сарын арчилгаанд домэйн нэрийн төлбөр орохгүй.</p>
-  <p class="pk-note" data-reveal>Аль багц тохирохыг мэдэхгүй байна уу? <a href="#contact">Бидэнтэй ярилцаад хамтдаа шийдье</a></p>
+  <p class="pk-note" data-reveal>Аль үйлчилгээ тохирохыг мэдэхгүй байна уу? <a href="#contact">Бидэнтэй ярилцаад хамтдаа шийдье</a></p>
 </section>
 
 <!-- 6. PROCESS -->
@@ -655,12 +654,12 @@ footer{padding:calc(110*var(--u)) calc(90*var(--u)) calc(40*var(--u))}
         <label>Нэр<input type="text" name="name" placeholder="Таны нэр" autocomplete="name" required></label>
         <label>Утас эсвэл и-мэйл<input type="text" name="contact" placeholder="9900 0000" required></label>
       </div>
-      <label>Багц
+      <label>Үйлчилгээ
         <select name="service" id="serviceSelect">
           <option value="">— Сонгоно уу —</option>
           <option value="web">01 · Вэб сайт</option>
           <option value="web-social">02 · Вэб + Сошиал</option>
-          <option value="content">03 · Контент багц</option>
+          <option value="content">03 · Контент</option>
           <option value="other">Бусад / мэдэхгүй байна</option>
         </select>
       </label>
@@ -676,9 +675,9 @@ footer{padding:calc(110*var(--u)) calc(90*var(--u)) calc(40*var(--u))}
   <div class="f-big" aria-hidden="true">TB Plan<i></i></div>
   <div class="f-row">
     <div class="f-links">
-      <a href="#bagts" data-pkg="web">Вэб сайт</a>
-      <a href="#bagts" data-pkg="web-social">Вэб + Сошиал</a>
-      <a href="#bagts" data-pkg="content">Контент багц</a>
+      <a href="#uilchilgee" data-pkg="web">Вэб сайт</a>
+      <a href="#uilchilgee" data-pkg="web-social">Вэб + Сошиал</a>
+      <a href="#uilchilgee" data-pkg="content">Контент</a>
       <a href="#contact">Холбоо барих</a>
     </div>
     <span>© <span id="year"></span> TB Plan. Бүх эрх хуулиар хамгаалагдсан.</span>
@@ -1119,7 +1118,7 @@ if (q) sel.value = MAP[q] || 'other';
 
 /* ---------- contact form ---------- */
 var form = document.getElementById('contactForm'), hint = document.getElementById('formHint');
-var NAMES = {web:'Вэб сайт', 'web-social':'Вэб + Сошиал', content:'Контент багц', other:'Бусад'};
+var NAMES = {web:'Вэб сайт', 'web-social':'Вэб + Сошиал', content:'Контент', other:'Бусад'};
 form.addEventListener('submit', function(e){
   e.preventDefault();
   var d = Object.fromEntries(new FormData(form).entries());
@@ -1127,7 +1126,7 @@ form.addEventListener('submit', function(e){
     hint.className = 'hint err'; hint.textContent = 'Нэр, холбоо барих мэдээлэл, мессежээ бөглөнө үү.'; return;
   }
   hint.className = 'hint';
-  hint.textContent = 'Баярлалаа, ' + d.name.trim() + '! ' + (d.service ? '«' + NAMES[d.service] + '» багцын ' : '') + 'хүсэлтийг тань хүлээн авлаа. Удахгүй холбогдоно.';
+  hint.textContent = 'Баярлалаа, ' + d.name.trim() + '! ' + (d.service ? '«' + NAMES[d.service] + '» үйлчилгээний ' : '') + 'хүсэлтийг тань хүлээн авлаа. Удахгүй холбогдоно.';
   form.reset();
 });
 })();
