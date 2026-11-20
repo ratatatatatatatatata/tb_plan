@@ -1,0 +1,17 @@
+node_modules/
+dist/
+private-media/
+build-private/
+.wrangler/
+.env
+.env.*
+.dev.vars
+.dev.vars.*
+*.mp4
+*.mp3
+*.wav
+*.m4a
+*.vtt
+*.srt
+course.json
+*.log

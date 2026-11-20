@@ -1,0 +1,31 @@
+{
+  "name": "tbplan-hicheel-free",
+  "main": "cloudflare/worker.mjs",
+  "compatibility_date": "2026-11-20",
+  "workers_dev": false,
+  "preview_urls": false,
+  "triggers": {"crons": ["17 * * * *"]},
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "run_worker_first": true,
+    "html_handling": "none",
+    "not_found_handling": "none"
+  },
+  "d1_databases": [{
+    "binding": "DB",
+    "database_name": "tbplan-hicheel-free",
+    "database_id": "REPLACE_WITH_DEDICATED_FREE_D1_ID",
+    "migrations_dir": "cloudflare/schema"
+  }],
+  "vars": {
+    "FREE_MODE": "1",
+    "SITE_ORIGIN": "https://www.tbplan.mn",
+    "GOOGLE_CLIENT_ID": "",
+    "ADMIN_GOOGLE_SUB": "",
+    "ENROLLMENT_ENABLED": "0",
+    "BANK_NAME": "",
+    "BANK_ACCOUNT": "",
+    "BANK_HOLDER": ""
+  }
+}
