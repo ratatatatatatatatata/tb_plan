@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="mn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f7fb">
+  <meta name="description" content="Төлөвлө. Хэрэгжүүл. Сайжруул. — өөрийгөө удирдах, зорилгоо хэрэгжүүлэх TB Plan-ийн 19 богино хичээл.">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Хичээл — TB Plan</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Үндсэн агуулга руу</a>
+  <header class="site-header">
+    <div class="header-pill">
+      <a class="logo" href="/" aria-label="TB Plan нүүр">TB Plan<i aria-hidden="true"></i></a>
+      <nav aria-label="Үндсэн цэс">
+        <a href="/#uilchilgee">Үйлчилгээ</a>
+        <a class="current" href="/hicheel/" aria-current="page">Хичээл</a>
+        <a href="/#contact">Холбоо барих</a>
+      </nav>
+    </div>
+    <button class="button button-dark account-trigger" id="account-button" disabled>Нэвтрэх</button>
+  </header>
+
+  <main id="main">
+    <section class="hero wrap" aria-labelledby="course-title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="orange-dot" aria-hidden="true"></span> TB PLAN / ХИЧЭЭЛ</p>
+        <h1 id="course-title">Төлөвлө.<br>Хэрэгжүүл.<br><span>Сайжруул.</span></h1>
+        <p class="hero-subtitle" id="course-subtitle">Өөрийгөө удирдах, зорилгоо хэрэгжүүлэх 19 богино хичээл</p>
+        <div class="hero-actions">
+          <a class="button button-dark" href="#curriculum">Хөтөлбөртэй танилцах <span aria-hidden="true">↘</span></a>
+          <p class="course-format">Монгол хэлээр<br><span>Нэг хичээл. Нэг жижиг алхам.</span></p>
+        </div>
+      </div>
+
+      <div class="hero-side">
+        <div class="process-card" aria-hidden="true">
+          <div class="process-top"><span>ӨӨРӨӨСӨӨ ЭХЭЛ.</span><span class="process-index">01—19</span></div>
+          <div class="process-visual">
+            <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+            <div class="process-core"><span>ДАРААГИЙН</span><strong>алхам.</strong><i>↗</i></div>
+            <span class="orbit-label orbit-label-one">ТӨЛӨВЛӨ</span>
+            <span class="orbit-label orbit-label-two">ХЭРЭГЖҮҮЛ</span>
+            <span class="orbit-label orbit-label-three">САЙЖРУУЛ</span>
+          </div>
+          <div class="process-bottom"><span>ТОДОРХОЙ ЗОРИЛГО</span><span>→</span><span>БОДИТ ҮЙЛДЭЛ</span></div>
+        </div>
+        <div class="enrollment-card" aria-labelledby="enrollment-title">
+          <div class="enrollment-heading"><div><p class="eyebrow" id="enrollment-title">СУРГАЛТЫН ЭРХ</p><strong id="course-price">Үнэ зарлагдаагүй</strong></div><span class="access-badge" id="access-badge">Удахгүй</span></div>
+          <p id="access-description">Бүртгэл удахгүй нээгдэнэ</p>
+          <button class="button button-accent full-width" id="enroll-button" disabled>Бүртгэл удахгүй нээгдэнэ</button>
+          <p class="enrollment-note" id="enrollment-note">Хичээлүүдийн агуулгатай доороос танилцаарай.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="course-facts wrap" aria-label="Сургалтын бүтэц">
+      <div><strong id="lesson-count">19</strong><span>богино хичээл</span></div>
+      <div><strong id="module-count">05</strong><span>хоорондоо холбогдох бүлэг</span></div>
+      <div><strong>MN</strong><span>Монгол тайлбар, Монгол жишээ</span></div>
+      <p>Санаагаа ойлгоод өнгөрөхөөс<br><em>нэг үйлдэл хийж турших хүртэл.</em></p>
+    </section>
+
+    <section class="learning-section wrap" id="curriculum" aria-labelledby="curriculum-title">
+      <div class="section-heading"><div><p class="eyebrow">СУРАЛЦАХ ДАРААЛАЛ</p><h2 id="curriculum-title">Өөрийн хурдаар.<br>Нэг алхам урагш.</h2></div><p>Төлөв, зуршил, зорилгоос эхлээд<br>харилцаа, бизнес, өдөр тутмын шийдвэр хүртэл.</p></div>
+      <p class="notice" id="connection-status" role="status">Бүртгэл удахгүй нээгдэнэ. Одоогоор сургалтын хөтөлбөртэй танилцах боломжтой.</p>
+      <div class="learning-grid">
+        <aside class="curriculum-panel" aria-label="Хичээл сонгох">
+          <div class="curriculum-top"><span>Хөтөлбөр</span><span id="progress-summary">19 хичээл</span></div>
+          <div class="course-progress" id="course-progress" hidden><progress id="progress-meter" max="19" value="0" aria-label="Дуусгасан хичээлийн тоо"></progress><p id="progress-label"></p></div>
+          <div id="module-list"></div>
+        </aside>
+
+        <article class="lesson-panel" id="lesson-panel" aria-labelledby="lesson-title" tabindex="-1">
+          <div class="lesson-breadcrumb"><span id="lesson-module">01 / Өөрийгөө ойлгох</span><span id="lesson-position">01 / 19</span></div>
+          <div class="player-shell" id="player-shell">
+            <div class="player-placeholder" id="player-placeholder">
+              <span class="play-mark" aria-hidden="true">↗</span>
+              <p id="player-message">Багаас эхлэхэд хангалттай.</p>
+              <span id="player-note">Хичээлийн бичлэг бүртгэл нээгдэхэд үзэх боломжтой болно.</span>
+              <button class="button button-light" id="play-button" disabled>Бүртгэл удахгүй нээгдэнэ</button>
+            </div>
+            <div id="player-mount" hidden></div>
+          </div>
+          <div class="lesson-copy"><p class="eyebrow" id="lesson-label">ХИЧЭЭЛ 01</p><h3 id="lesson-title">Нэг мессеж өдрийг чинь шийдэх үү?</h3><p id="lesson-objective">Дарамттай үед биеийн байдал, анхаарал, дотоод яриагаа ажиглаж дараагийн бодит үйлдлээ сонгоно.</p></div>
+          <div class="lesson-toolbar"><span id="lesson-duration">Монгол хэлээр</span><button class="button button-small" id="complete-button" hidden disabled>Дуусгаснаар тэмдэглэх</button></div>
+          <p class="save-status" id="save-status" role="status"></p>
+          <section class="worksheet" id="worksheet" aria-labelledby="worksheet-title" hidden><p class="eyebrow">ӨӨРӨӨ ХИЙЖ ҮЗЭХ</p><h4 id="worksheet-title">Энэ хичээлийн дасгал</h4><p id="worksheet-text"></p></section>
+          <section class="lesson-quiz" id="lesson-quiz" aria-labelledby="quiz-title" hidden><p class="eyebrow">ОЙЛГОЛТОО ШАЛГАХ</p><h4 id="quiz-title">Хоёр богино асуулт</h4><div id="quiz-questions"></div><p class="dialog-fine-print">Хариултыг зөвхөн энэ дэлгэцэд шалгана. Оноо, гэрчилгээний бүртгэл үүсэхгүй.</p></section>
+          <div class="lesson-navigation"><button class="text-button" id="previous-lesson" disabled>← Өмнөх хичээл</button><button class="text-button" id="next-lesson">Дараагийн хичээл →</button></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="closing-note wrap"><p class="eyebrow">ОЙЛГО. ТУРШ. ЭРГЭЖ ХАР.</p><h2>Өөрчлөлт нэг том өдрөөс биш,<br><span>өнөөдрийн нэг үйлдлээс.</span></h2><a class="text-button" href="#curriculum">Эхний хичээлтэй танилцах ↗</a></section>
+  </main>
+
+  <footer class="site-footer wrap"><a class="logo" href="/" aria-label="TB Plan нүүр">TB Plan<i aria-hidden="true"></i></a><p>TB Plan-ийн бие даасан сургалт.<br>Tony Robbins-ийн албан ёсны, хамтарсан сургалт биш.</p><a href="/#contact">Холбоо барих ↗</a></footer>
+  <noscript><p class="noscript">Хичээлийн жагсаалт, нэвтрэх хэсгийг ашиглахын тулд JavaScript-ээ идэвхжүүлнэ үү. Бүртгэл одоогоор нээгдээгүй.</p></noscript>
+
+  <dialog class="dialog" id="auth-dialog" aria-labelledby="auth-title">
+    <div class="dialog-header"><p class="eyebrow">TB PLAN / МИНИЙ ХИЧЭЭЛ</p><button class="icon-button" data-close="auth-dialog" aria-label="Цонх хаах">×</button></div>
+    <h2 id="auth-title">Тавтай морил.</h2><p class="dialog-intro" id="auth-intro">Сургалтын эрхээ авах Google бүртгэлээ сонгоно уу.</p>
+    <div id="google-signin" class="google-signin"></div>
+    <p class="form-message" id="auth-message" role="status"></p>
+    <p class="dialog-fine-print">Google бүртгэлээр нэвтэрнэ. Таны нэр, имэйл, сургалтын эрх болон ахицыг хадгална. Нууц үг, картын мэдээлэл авахгүй. <a href="./privacy.html">Мэдээллийн хэрэглээ</a></p>
+  </dialog>
+
+  <dialog class="dialog" id="account-dialog" aria-labelledby="account-title">
+    <div class="dialog-header"><p class="eyebrow">TB PLAN / МИНИЙ ХИЧЭЭЛ</p><button class="icon-button" data-close="account-dialog" aria-label="Цонх хаах">×</button></div>
+    <h2 id="account-title">Таны бүртгэл</h2><p class="account-email" id="account-email"></p><p id="account-access"></p>
+    <a id="admin-link" href="./admin.html" class="text-button" hidden>Захиалга удирдах →</a><button class="button button-dark full-width" id="account-continue">Хичээлүүд рүү</button><button class="text-button signout-button" id="signout-button">Бүртгэлээс гарах</button><p class="form-message" id="account-message" role="status"></p>
+  </dialog>
+
+  <dialog class="dialog payment-dialog" id="payment-dialog" aria-labelledby="payment-title">
+    <div class="dialog-header"><p class="eyebrow">TB PLAN / СУРГАЛТЫН ЭРХ</p><button class="icon-button" data-close="payment-dialog" aria-label="Цонх хаах">×</button></div>
+    <h2 id="payment-title">Төлбөр төлөх</h2><p class="dialog-intro" id="payment-course"></p>
+    <div class="payment-summary"><span>Нэг удаагийн төлбөр</span><strong id="payment-amount"></strong></div><p id="payment-access"></p>
+    <div id="payment-content" hidden><dl class="bank-details"><dt>Банк</dt><dd id="bank-name"></dd><dt>Данс / IBAN</dt><dd id="bank-account"></dd><dt>Хүлээн авагч</dt><dd id="bank-holder"></dd><dt>Гүйлгээний утга</dt><dd id="bank-reference"></dd></dl><p class="qr-instruction">Дээрх дүнг банкнаасаа шилжүүлж, гүйлгээний утгыг яг хуулж бичнэ үү. TB Plan шилжүүлгийг банкнаас шалгасны дараа эрх нээнэ.</p><button class="text-button copy-button" id="copy-reference">Гүйлгээний утга хуулах</button></div>
+    <p class="form-message" id="payment-message" role="status"></p>
+    <button class="button button-accent full-width" id="check-payment" disabled>Эрх нээгдсэн эсэхийг шалгах</button>
+    <p class="dialog-fine-print">Шилжүүлэг автоматаар батлагдахгүй. Картын дугаар, нууц код оруулах шаардлагагүй.</p>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" hidden></div>
+</body>
+</html>
